@@ -10,3 +10,9 @@ export interface LoginDto {
   password: string;
   userAgent?: string;
 }
+
+export interface ForgotPasswordDto {
+  password: string;
+  email: string;
+  confirmPassword: string;
+}

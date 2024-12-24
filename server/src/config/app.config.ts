@@ -12,7 +12,7 @@ const appConfig = () => ({
     REFRESH_SECRET: getEnv("JWT_JWT_REFRESH_SECRET", "1h"),
     REFRESH_EXPIRES_IN: getEnv("JWT_JWT_REFRESH_EXPIRES_IN", "30d"),
   },
-  NODEMAILER: getEnv("NODEMAILER"),
+  NODEMAILER: getEnv("NODEMAILER_SEND"),
   NODEMAILER_PASS: getEnv("NODEMAILER_PASS"),
 });
 

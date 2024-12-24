@@ -14,7 +14,7 @@ const Logo = ({ className }: IProps) => {
       )}
     >
       <Image
-        src={"NUC.svg"}
+        src={"/NUC.svg"}
         alt="logo"
         width={30}
         height={30}

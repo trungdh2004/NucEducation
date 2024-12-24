@@ -10,6 +10,9 @@ export interface UserDocument extends Document {
   isVerify: boolean;
   createdAt: Date;
   updatedAt: Date;
+  isAdmin: boolean;
+  isBlock: boolean;
+  blockAt: Date;
   comparePassword(value: string): Promise<boolean>;
 }
 
@@ -39,6 +42,17 @@ const userSchema = new Schema(
     isVerify: {
       type: Boolean,
       default: false,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    isBlock: {
+      type: Boolean,
+      default: false,
+    },
+    blockAt: {
+      type: Date,
     },
   },
   {

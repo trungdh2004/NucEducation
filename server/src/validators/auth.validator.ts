@@ -27,3 +27,20 @@ export const loginValidator = z.object({
 export const verificationCodeValidator = z.object({
   code: verificationCodeSchema,
 });
+
+export const sendMailVerifyValidator = z.object({
+  email: emailSchema,
+});
+
+export const verifyOtpValidator = z.object({
+  email: emailSchema,
+  code: verificationCodeSchema,
+});
+
+export const forgotPasswordValidator = z
+  .object({
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: passwordSchema,
+  })
+  .refine((data) => data.password === data.confirmPassword);

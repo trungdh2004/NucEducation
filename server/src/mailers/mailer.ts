@@ -13,18 +13,13 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-interface TypeTemplatesEmail {
-  requestOTP: string;
-  verifyEmail: string;
-}
-
 export const templatesEmail = {
   requestOTP: {
     subject: "Request OTP",
     template: "/requestOTP.ejs",
   },
   verifyEmail: {
-    subject: "Verify Email",
+    subject: "Xác minh tài khoản tại NUCEDUCATION",
     template: "/verifyEmail.ejs",
   },
 };
@@ -43,8 +38,8 @@ export const getTemplateEmail = (
 const sendToMail = async (
   to: string,
   data: any,
-  template: TemplatesEmailValues = templatesEmail.verifyEmail,
-  subject:string
+  template: string,
+  subject: string
 ) => {
   ejs.renderFile(__dirname + "/templatesEjs" + template, data, (err, data) => {
     const mailOptions = {
@@ -56,6 +51,7 @@ const sendToMail = async (
 
     transporter.sendMail(mailOptions, (err, data) => {
       if (err) {
+        console.log("err", err);
         console.log("Thất bại");
       } else {
         console.log("Thành công");

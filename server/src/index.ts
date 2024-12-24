@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { config } from "./config/app.config";
@@ -10,14 +10,13 @@ import connectDatabase from "./database/database";
 const app = express();
 app.use(
   cors({
-    origin: process.env.APP_ORIGIN!,
+    origin: config.APP_ORIGIN,
     credentials: true,
   })
 );
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 connectDatabase();
 app.use(config.BASE_PATH, routes);
 

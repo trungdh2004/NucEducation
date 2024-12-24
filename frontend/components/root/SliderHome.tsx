@@ -12,9 +12,6 @@ import { cn } from "@/lib/utils";
 const SliderHome = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
-
-  console.log({ current, api });
-
   React.useEffect(() => {
     if (!api) {
       return;
@@ -24,9 +21,6 @@ const SliderHome = () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-
-  console.log({ current });
-
   return (
     <div>
       <Carousel

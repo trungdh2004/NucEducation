@@ -1,16 +1,13 @@
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { BellIcon } from "lucide-react";
-import Image from "next/image";
 import SearchCodeClient from "./SearchCodeClient";
+import dynamic from "next/dynamic";
+
+const HeaderUser = dynamic(() => import("./HeaderUser"), {
+  loading: () => <p>Loading...</p>,
+  ssr: true,
+});
 
 const Header = () => {
   return (
@@ -25,33 +22,8 @@ const Header = () => {
         <Button variant={"outline"} size={"icon"} border={"notActive"}>
           <BellIcon size={20} />
         </Button>
-        <Button border={"notActive"}>Đăng nhập</Button>
 
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              border={"notActive"}
-              variant={"outline"}
-              className="p-0 rounded-full gap-0 size-9"
-            >
-              <Image
-                src={"/avatar.jpg"}
-                alt="avatar"
-                width={30}
-                height={30}
-                className="w-full h-full rounded-full"
-              />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="bottom" align="end" className="w-56">
-            <DropdownMenuLabel>Đỗ Hữu Trung</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Hồ sơ</DropdownMenuItem>
-            <DropdownMenuItem>Cài đặt</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Đăng xuất</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <HeaderUser />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BookmarkIcon,
   BookMinusIcon,
@@ -7,37 +8,38 @@ import {
   HouseIcon,
 } from "lucide-react";
 
-const listMenu = [
+const listMenuClient: any[] = [
   {
     title: "Khám phá",
     link: "/",
-    icons: HouseIcon,
+    icon: HouseIcon,
   },
   {
     title: "Đa dạng",
     link: "/diversity",
-    icons: EarthIcon,
+    icon: EarthIcon,
   },
   {
     title: "Thư viện",
     link: "/library",
-    icons: BookUserIcon,
+    icon: BookUserIcon,
   },
-  {
-    title: "Yêu thích",
-    link: "/heart",
-    icons: BookmarkIcon,
-  },
+
   {
     title: "Báo cáo",
     link: "/dashboard",
-    icons: ChartPieIcon,
+    icon: ChartPieIcon,
   },
   {
     title: "Bài viết",
     link: "/blogs",
-    icons: BookMinusIcon,
+    icon: BookMinusIcon,
+  },
+  {
+    title: "Yêu thích",
+    link: "/heart",
+    icon: BookmarkIcon,
   },
 ];
 
-export default listMenu;
+export default listMenuClient;

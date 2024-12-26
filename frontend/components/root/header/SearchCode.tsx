@@ -1,8 +1,14 @@
 "use client";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { DoorOpenIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -17,7 +23,7 @@ const formSchema = z.object({
     }),
 });
 
-const SearchCode = ({className}:{className?:string}) => {
+const SearchCode = ({ className }: { className?: string }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,12 +76,24 @@ const SearchCode = ({className}:{className?:string}) => {
             form.formState.errors.code && "bg-rose-500"
           )}
         ></div>
-        <button
-          type="submit"
-          className=" px-1 text-sm  py-1 rounded-sm text-blue-500 bg-blue-50 hover:bg-blue-100 "
-        >
-          Tham gia
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              type="submit"
+              className=" px-1 text-sm  py-1 rounded-sm text-blue-500 bg-blue-50 hover:bg-blue-100 "
+            >
+              {/* Tham gia */}
+              <DoorOpenIcon size={20} />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent
+            side="bottom"
+            align="center"
+            className="text-blue-500 bg-blue-50 shadow-sm"
+          >
+            Tham gia
+          </TooltipContent>
+        </Tooltip>
       </form>
     </Form>
   );

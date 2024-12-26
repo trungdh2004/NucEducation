@@ -1,139 +1,185 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import * as React from "react";
-
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-  useSidebar,
-} from "@/components/ui/sidebar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import listMenu from "@/config/MenuConfig";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import { useSidebar } from "@/components/ui/sidebar";
+import listMenuClient from "@/config/MenuConfig";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
 import Logo from "../header/Logo";
-import SearchCode from "../header/SearchCode";
+import { Button } from "@/components/ui/button";
+const SIDEBAR_WIDTH_MOBILE = "18rem";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathName = usePathname();
-  const { isMobile } = useSidebar();
+export function AppSidebar() {
+  const { isMobile, openMobile, setOpenMobile } = useSidebar();
 
-  return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent gap-0 data-[state=open]:text-sidebar-accent-foreground border"
-            >
-              <div className="flex aspect-square size-10 items-center justify-center rounded-lg text-sidebar-primary-foreground">
-                <Logo />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold text-blue-500">
-                  NucEdu
-                </span>
-                <span className="truncate text-xs">
-                  Cùng làm bài tập nào !!!
-                </span>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Học nào</SidebarGroupLabel>
-          <SidebarGroupContent>
-            {listMenu?.map((item, index) => (
-              <AppSidebarItem
-                key={`${index}-${item.link}`}
-                icon={item.icons}
-                title={item.title}
-                link={item.link}
-                isActive={pathName === item.link}
-              />
-            ))}
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      {isMobile && (
-        <SidebarFooter>
-          <SearchCode />
-        </SidebarFooter>
-      )}
-      <SidebarRail />
-    </Sidebar>
-  );
-}
-
-interface IPropsItem {
-  icon: LucideIcon;
-  title: string;
-  link: string;
-  isActive?: boolean;
-}
-
-function AppSidebarItem({ icon: Icon, title, link, isActive }: IPropsItem) {
-  const { isMobile, open } = useSidebar();
-
-  if (!open && !isMobile) {
+  if (isMobile) {
     return (
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link href={link} className="cursor-pointer block mb-1">
-            <div
-              className={cn(
-                "h-10 w-full hover:bg-blue-50 hover:text-blue-500 flex items-center rounded-sm gap-0",
-                isActive && "bg-blue-50 text-blue-500"
-              )}
-            >
-              <div className="size-10 flex items-center justify-center">
-                <Icon size={20} />
-              </div>
-              <span className={cn(!open && !isMobile && "hidden")}>
-                {title}
-              </span>
-            </div>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="left" className="bg-blue-50 text-blue-500">
-          {title}
-        </TooltipContent>
-      </Tooltip>
+      <Sheet open={openMobile} onOpenChange={setOpenMobile}>
+        <SheetContent
+          data-sidebar="sidebar"
+          data-mobile="true"
+          className="w-[--sidebar-width] bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          style={
+            {
+              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+            } as React.CSSProperties
+          }
+          side={"left"}
+        >
+          <div className="hidden">
+            <SheetTitle></SheetTitle>
+          </div>
+          <div className="flex h-full w-full flex-col p-2">
+            <div className="w-full h-20 bg-gray-500"></div>
+          </div>
+        </SheetContent>
+      </Sheet>
     );
   }
 
   return (
-    <Link href={link} className="cursor-pointer block mb-1">
+    <div className="fixed top-0 left-0 bottom-0 hidden lg:block">
+      <ScrollArea className="h-full w-[--sidebar-width] lg:border-r border-dashed pb-4 bg-white">
+        <div className="p-1 space-y-2">
+          <div className="w-full h-12 border flex items-center px-2 rounded-sm">
+            <div>
+              <Logo className="size-10" />
+            </div>
+            <div className="flex-1 pl-2">
+              <p className="text-sm font-semibold leading-5">NUC Education</p>
+              <p className="line-clamp-1 text-xs text-gray-500">
+                Cùng làm bài tập nào !!!
+              </p>
+            </div>
+          </div>
+          <SidebarLabel title="Tạo câu hỏi" />
+          <Button className="w-full">
+            <PlusIcon size={20}/> Tạo câu hỏi
+          </Button>
+          <SidebarLabel title="Danh mục" />
+          <SidebarList />
+        </div>
+      </ScrollArea>
+    </div>
+  );
+}
+
+function SidebarLabel({ title }: { title: string }) {
+  return (
+    <div className="w-full text-gray-400 text-xs font-normal text-sidebar-foreground/70 px-2">
+      {title}
+    </div>
+  );
+}
+
+interface Props {
+  Icon?: LucideIcon;
+  label: string;
+  path: string;
+  isAction: boolean;
+  isParent?: boolean;
+}
+
+const SidebarItem = ({ Icon, label, path, isAction, isParent }: Props) => {
+  return (
+    <Link href={path}>
       <div
         className={cn(
-          "h-10 w-full hover:bg-blue-50 hover:text-blue-500 flex items-center rounded-sm gap-0",
-          isActive && "bg-blue-50 text-blue-500"
+          "h-10 px-2 group py-3 gap-2 flex items-center hover:bg-[rgba(24,119,242,0.08)] rounded-md cursor-pointer mt-2",
+          isAction && "bg-[rgba(24,119,242,0.08)]",
+          isParent && "font-semibold"
         )}
       >
-        <div className="size-10 flex items-center justify-center">
-          <Icon size={20} />
-        </div>
-        <span className={cn(!open && !isMobile && "hidden")}>{title}</span>
+        {!!Icon && (
+          <Icon
+            className={cn(
+              "group-hover:text-blue-500 text-[#4b5563]",
+              isAction && "text-blue-500"
+            )}
+            size={18}
+          />
+        )}
+
+        <span
+          className={cn(
+            "group-hover:text-blue-500 text-[#4b5563] text-sm",
+            isAction && "text-blue-500"
+          )}
+        >
+          {label}
+        </span>
       </div>
     </Link>
   );
-}
+};
+
+const SidebarList = () => {
+  const location = usePathname();
+
+  return (
+    <div>
+      {listMenuClient?.map((item, index) => {
+        if (item.children) {
+          return (
+            <Accordion
+              type="multiple"
+              className=""
+              key={`${index}-${item.link}`}
+            >
+              <AccordionItem value="item-1" className="border-none pt-2">
+                <AccordionTrigger className="pb-2 border-b-none h-10 w-full px-2 group py-3 gap-2 flex items-center hover:bg-[rgba(24,119,242,0.08)] rounded-md cursor-pointer">
+                  <p className="text-sm font-semibold text-[#4b5563] group-hover:text-blue-500 cursor-pointer flex items-center gap-2">
+                    {!!item.icon && (
+                      <item.icon
+                        className={cn(
+                          "group-hover:text-blue-500 text-[#4b5563]"
+                          // isAction && "text-blue-500"
+                        )}
+                        size={18}
+                      />
+                    )}
+                    {item.title}
+                  </p>
+                </AccordionTrigger>
+                <AccordionContent className="pb-0 pl-2" datatype="open">
+                  <div className="space-y-1  mt-2 ">
+                    {item.children.map((row: any, index2: number) => (
+                      <SidebarItem
+                        key={`${index2}-${index}`}
+                        label={row.title}
+                        Icon={row?.icon}
+                        path={`/${item.link}${row.link}`}
+                        isAction={location === `/${item.link}${row.link}`}
+                      />
+                    ))}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          );
+        }
+
+        return (
+          <SidebarItem
+            key={`${item.link}-${index}`}
+            label={item.title}
+            Icon={item.icon}
+            path={`${item.link}`}
+            isAction={location === `${item.link}`}
+            isParent
+          />
+        );
+      })}
+    </div>
+  );
+};

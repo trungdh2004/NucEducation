@@ -73,6 +73,11 @@ const HeaderUser = () => {
                 </div>
               </div>
             </DropdownMenuLabel>
+            <Link href={"/admin"}>
+              <DropdownMenuItem className="cursor-pointer">
+                Trang quản trị
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
               Hồ sơ

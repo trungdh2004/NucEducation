@@ -10,6 +10,7 @@ type OptionsFetch = {
   body: any;
   headers?: Headers;
   cache?: "force-cache" | "no-store";
+  next?: any;
 };
 
 let isRefreshing = false;
@@ -45,11 +46,15 @@ const refreshTokenRequest = async (): Promise<any> => {
 const fetchApi = async (url: string, options: OptionsFetch) => {
   const { method = "GET", body } = options;
 
+  const headersType = {
+    ...(!isFormData(body) && { "Content-Type": "application/json" }),
+  };
+
   const initOptions: RequestInit = {
     ...options,
     method: method,
     headers: {
-      "Content-Type": "application/json",
+      ...headersType,
     },
     credentials: "include",
     body: body,
@@ -114,6 +119,25 @@ const apiRequest = {
     return fetchApi(urlRequest, {
       method: "GET",
       body: null,
+      ...options,
+    });
+  },
+  delete: async (url: string, options?: any) => {
+    const urlRequest = url.startsWith("/") ? url.slice(1) : url;
+
+    return fetchApi(urlRequest, {
+      method: "DELETE",
+      body: null,
+      ...options,
+    });
+  },
+  put: async (url: string, body: any, options?: any) => {
+    const urlRequest = url.startsWith("/") ? url.slice(1) : url;
+    const data = isFormData(body) ? body : JSON.stringify(body);
+
+    return await fetchApi(urlRequest, {
+      method: "PUT",
+      body: data,
       ...options,
     });
   },

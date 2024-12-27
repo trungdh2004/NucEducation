@@ -18,7 +18,7 @@ import {
   CreditCard,
   HomeIcon,
   LogOut,
-  LucideIcon
+  LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -130,7 +130,7 @@ const SidebarItem = ({ Icon, label, path, isAction, isParent }: Props) => {
     <Link href={path}>
       <div
         className={cn(
-          "h-10 px-2 group py-3 gap-2 flex items-center hover:bg-[rgba(24,119,242,0.08)] rounded-md cursor-pointer mt-2",
+          "h-10 px-2 group py-3 gap-2 flex items-center hover:bg-[rgba(24,119,242,0.08)] rounded-md cursor-pointer mb-2",
           isAction && "bg-[rgba(24,119,242,0.08)]",
           isParent && "font-semibold"
         )}
@@ -171,7 +171,7 @@ const SidebarList = () => {
               className=""
               key={`${index}-${item.link}`}
             >
-              <AccordionItem value="item-1" className="border-none pt-2">
+              <AccordionItem value="item-1" className="border-none mb-2">
                 <AccordionTrigger className="pb-2 border-b-none h-10 w-full px-2 group py-3 gap-2 flex items-center hover:bg-[rgba(24,119,242,0.08)] rounded-md cursor-pointer">
                   <p className="text-sm font-semibold text-[#4b5563] group-hover:text-blue-500 cursor-pointer flex items-center gap-2">
                     {!!item.icon && (

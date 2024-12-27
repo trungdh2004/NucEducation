@@ -7,7 +7,6 @@ import {
   NewspaperIcon,
   NotebookTabsIcon,
   SchoolIcon,
-  ShapesIcon,
   SquareUserRoundIcon,
 } from "lucide-react";
 
@@ -31,11 +30,6 @@ const listMenuAdmin: any[] = [
         title: "Môn học",
         link: "/category",
         icon: ChartColumnStackedIcon,
-      },
-      {
-        title: "Cấp bậc",
-        link: "/rank",
-        icon: ShapesIcon,
       },
       {
         title: "Câu hỏi",

@@ -1,5 +1,6 @@
 "use client";
 
+import ModelLoading from "@/components/common/ModelLoading";
 import apiRequest from "@/lib/fetchApi";
 import { UserType } from "@/types/User.type";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -56,7 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           </div>
         </div>
       )}
-
+      <ModelLoading />
       {children}
     </AuthContext.Provider>
   );

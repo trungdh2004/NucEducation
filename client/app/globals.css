@@ -117,3 +117,8 @@ body {
 .scroll-custom-x::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
+.hiddenClose > .closeDialog {
+  display: none;
+}
+

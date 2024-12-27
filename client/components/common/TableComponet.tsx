@@ -106,7 +106,8 @@ const TableComponent = <TData, TValue>({
                   {!!colIndex && (
                     <TableCell className="text-center">
                       {(pageIndex - 1 > 0 ? pageIndex - 1 : 0) * pageSize +
-                        index + 1}
+                        index +
+                        1}
                     </TableCell>
                   )}
                   {row.getVisibleCells().map((cell) => (
@@ -122,7 +123,7 @@ const TableComponent = <TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={!!colIndex ? 1 + columns.length : columns.length}
                   className="h-24 text-center"
                 >
                   Không có giá trị

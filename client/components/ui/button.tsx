@@ -21,7 +21,9 @@ const buttonVariants = cva(
           "border-b-[3px] border-gray-100 hover:bg-accent hover:text-accent-foreground active:border-b",
         link: "border-b-[3px] border-blue-50 text-primary   underline-offset-4 hover:underline  hover:border-blue-400 hover:text-blue-500 active:border-b ",
         success:
-          "bg-green-400 border-b-[3px] border-green-800 text-white shadow-sm hover:bg-green/70 active:border-b",
+          "bg-green-400 border-b-[3px] border-green-800 text-white shadow-sm hover:bg-green-500/70 active:border-b",
+        warning:
+          "bg-yellow-400 border-b-[3px] border-yellow-800 text-white shadow-sm hover:bg-yellow-500/70 active:border-b",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -37,7 +39,7 @@ const buttonVariants = cva(
     defaultVariants: {
       variant: "default",
       size: "default",
-      border:"default"
+      border: "default",
     },
   }
 );
@@ -49,11 +51,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size,border, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, border, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size,border, className }))}
+        className={cn(buttonVariants({ variant, size, border, className }))}
         ref={ref}
         {...props}
       />

@@ -12,7 +12,7 @@ import { RequestUser } from "../interface/config.interface";
 
 const authorization = asyncHandler(
   async (req: RequestUser, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies?.accessToken;
 
     if (!token) {
       throw new UnauthorizedException(
@@ -33,7 +33,7 @@ const authorization = asyncHandler(
 
     const user = await userService.getUserById(payload.userId as string);
 
-    if (user.isVerify) {
+    if (!user.isVerify) {
       throw new BadRequestException(
         "Account not verified",
         ErrorCode.VERIFICATION_ERROR

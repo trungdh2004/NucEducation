@@ -33,7 +33,7 @@ export class CategoryService {
       : {};
 
     const queryDeleted = {
-      deleted: data.tab === 1 ? true : false,
+      deleted: data.tab === 0 ? true : false,
     };
 
     const listData = await CategoryModel.find({

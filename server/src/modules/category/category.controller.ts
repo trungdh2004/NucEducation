@@ -69,7 +69,7 @@ export class CategoryController {
         throw new BadRequestException("Chưa truyền id");
       }
 
-      const data = await this.categoryService.delete(id);
+      const data = await this.categoryService.unDelete(id);
 
       return res.status(HTTPSTATUS.OK).json({
         message: "Xóa thành công",

@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 interface Props {
   children: React.ReactNode;
@@ -9,10 +9,12 @@ interface Props {
 
 const TooltipComponent = ({ label, className, children }: Props) => {
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent className={className}>{label}</TooltipContent>
-    </Tooltip>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipContent className={className}>{label}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 

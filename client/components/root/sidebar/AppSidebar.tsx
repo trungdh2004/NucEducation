@@ -11,12 +11,12 @@ import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useSidebar } from "@/components/ui/sidebar";
 import listMenuClient from "@/config/MenuConfig";
 import { cn } from "@/lib/utils";
-import { LucideIcon, PlusIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import Logo from "../header/Logo";
-import { Button } from "@/components/ui/button";
+import ButtonCreateQuiz from "./ButtonCreateQuiz";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 
 export function AppSidebar() {
@@ -52,9 +52,7 @@ export function AppSidebar() {
               </div>
             </div>
             <SidebarLabel title="Tạo câu hỏi" />
-            <Button className="w-full">
-              <PlusIcon size={20} /> Tạo câu hỏi
-            </Button>
+            <ButtonCreateQuiz />
             <SidebarLabel title="Danh mục" />
             <SidebarList />
           </div>
@@ -79,9 +77,7 @@ export function AppSidebar() {
             </div>
           </div>
           <SidebarLabel title="Tạo câu hỏi" />
-          <Button className="w-full">
-            <PlusIcon size={20} /> Tạo câu hỏi
-          </Button>
+          <ButtonCreateQuiz />
           <SidebarLabel title="Danh mục" />
           <SidebarList />
         </div>

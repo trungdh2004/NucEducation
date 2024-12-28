@@ -1,13 +1,30 @@
 import { Router } from "express";
 import { categoryController } from "./category.module";
+import authorization from "../../middleware/authorization";
 
 const categoryRouter = Router();
 
 categoryRouter.post("/paging", categoryController.pagingCategory);
-categoryRouter.post("/create", categoryController.createCategory);
-categoryRouter.post("/update/:id", categoryController.updateCategory);
-categoryRouter.post("/delete/:id", categoryController.deleteCategory);
-categoryRouter.post("/unDelete/:id", categoryController.unDeleteCategory);
+categoryRouter.post(
+  "/create",
+  authorization,
+  categoryController.createCategory
+);
+categoryRouter.put(
+  "/update/:id",
+  authorization,
+  categoryController.updateCategory
+);
+categoryRouter.delete(
+  "/delete/:id",
+  authorization,
+  categoryController.deleteCategory
+);
+categoryRouter.delete(
+  "/unDelete/:id",
+  authorization,
+  categoryController.unDeleteCategory
+);
 categoryRouter.get("/getById/:id", categoryController.getOne);
 
 export default categoryRouter;

@@ -16,3 +16,40 @@ export const validatorSearch = z.object({
   keyword: z.string(),
   tab: z.number().optional(),
 });
+
+export const quizCreateValidator = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Bạn chưa nhập tên",
+    })
+    .max(64),
+});
+
+export const quizUpdateValidator = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Bạn chưa nhập tên",
+    })
+    .max(64),
+  description: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Bạn chưa nhập mô tả",
+    })
+    .max(128),
+  image: z.string().trim().min(1, {
+    message: "Bạn chưa nhập mô tả",
+  }),
+  category: z.string().trim().min(1, {
+    message: "Bạn chưa nhập mô tả",
+  }),
+  level: z.number().min(1, {
+    message: "Bạn chưa nhập mô tả",
+  }),
+  difficulty: z.number().min(1, {}),
+});

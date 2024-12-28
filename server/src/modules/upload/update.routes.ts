@@ -29,7 +29,7 @@ uploadRouter.post(
 uploadRouter.post(
   "/multiple",
   (req: Request, res: Response, next: NextFunction) => {
-    uploadCloud.array("image")(req, res, (err: any) => {
+    uploadCloud.array("images")(req, res, (err: any) => {
       if (err) {
         console.error("Error uploading image:", err);
         if (err instanceof multer.MulterError) {

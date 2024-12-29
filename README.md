@@ -32,8 +32,8 @@ Liệt kê các tính năng chính của dự án:
 Liệt kê các công nghệ, framework, hoặc thư viện được sử dụng:
 - **Ngôn ngữ:** JavaScript, Typescript.
 - **Framework:** React, Express.
-- **Thư viện:** - Frontend: NextJs, Zustand, Axios, Shadcn, Rechart, Tailwind ...
-                - Server: NextJs, Zustand, Axios, Shadcn, Rechart, Tailwind ...
+- **Thư viện:** - NextJs, Zustand, Axios, Shadcn, Rechart, Tailwind, JWT, Mongose, Zod, multer, cloudinary...
+                
 
 ## 💻 Cài đặt
 Hướng dẫn cài đặt dự án:

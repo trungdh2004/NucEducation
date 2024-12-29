@@ -8,7 +8,7 @@ Một mô tả ngắn gọn, hấp dẫn về dự án của bạn.
 ## 📚 Nội dung
 - [📖 Giới thiệu](#📖-giới-thiệu)
 - [Tính năng](#tính-năng)
-- [Cài đặt](#cài-đặt)
+- [Cài đặt](#💻-cài-đặt)
 - [Sử dụng](#sử-dụng)
 - [Đóng góp](#đóng-góp)
 - [Liên hệ](#liên-hệ)

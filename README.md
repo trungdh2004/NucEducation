@@ -43,9 +43,10 @@ Hướng dẫn cài đặt dự án:
 Hướng dẫn cài đặt dự án:
 
 ### Yêu cầu
-- Node.js >= 14.x
+- Node.js >= 20.x
 - npm hoặc yarn
-
+- Mongose
+  
 ### Các bước cài đặt
 
 1. Clone repository:
@@ -56,7 +57,7 @@ Hướng dẫn cài đặt dự án:
    cd client
     ```
    ```bash
-   npm i
+   npm install
     ```
    ```bash
    npm run dev

@@ -50,4 +50,11 @@ Hướng dẫn cài đặt dự án:
 
 1. Clone repository:
    ```bash
-   git clone https://github.com/username/repository.git
+   git clone [https://github.com/username/repository.git](https://github.com/trungdh2004/NucEducation.git)
+2. Chạy phía frontend:
+   ```bash
+   cd client
+   ```bash
+   npm i
+   ```bash
+   npm run dev

@@ -57,6 +57,16 @@ Hướng dẫn cài đặt dự án:
    ```bash
    npm run dev
    ```
+3. Chạy phía server:
+   ```bash
+   cd server
+    ```
+   ```bash
+   npm install
+    ```
+   ```bash
+   npm run dev
+   ```
 ## Layout
 
 Hướng dẫn cài đặt dự án:

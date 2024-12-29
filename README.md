@@ -35,7 +35,6 @@ Liệt kê các công nghệ, framework, hoặc thư viện được sử dụng
 - **Thư viện:** Axios, Mongoose, etc.
 
 ## 💻 Cài đặt
-
 Hướng dẫn cài đặt dự án:
 ### Yêu cầu
 - Node.js >= 20.x

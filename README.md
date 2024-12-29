@@ -13,6 +13,7 @@ Một mô tả ngắn gọn, hấp dẫn về dự án của bạn.
 - [Đóng góp](#đóng-góp)
 - [Liên hệ](#liên-hệ)
 - [Giấy phép](#giấy-phép)
+- [Layout](#layout)
 
 ## 📖 Giới thiệu
 
@@ -34,6 +35,10 @@ Liệt kê các công nghệ, framework, hoặc thư viện được sử dụng
 - **Thư viện:** Axios, Mongoose, etc.
 
 ## 💻 Cài đặt
+
+Hướng dẫn cài đặt dự án:
+
+## Layout
 
 Hướng dẫn cài đặt dự án:
 

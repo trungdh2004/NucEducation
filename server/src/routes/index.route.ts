@@ -4,6 +4,7 @@ import userRouter from "../modules/user/user.routes";
 import categoryRouter from "../modules/category/category.routes";
 import uploadRouter from "../modules/upload/update.routes";
 import quizRouter from "../modules/quizz/quiz.routes";
+import questionRouter from "../modules/question/question.routes";
 
 const routes = Router();
 
@@ -12,5 +13,6 @@ routes.use("/user", userRouter);
 routes.use("/category", categoryRouter);
 routes.use("/upload", uploadRouter);
 routes.use("/quiz", quizRouter);
+routes.use("/question", questionRouter);
 
 export default routes;

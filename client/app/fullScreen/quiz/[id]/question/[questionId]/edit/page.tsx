@@ -1,17 +1,18 @@
 import React from "react";
-import QuestionIndex from "./_component/QuestionIndex";
+import QuestionIndex from "../../_component/QuestionIndex";
 
 const page = ({
   params,
 }: {
   params: {
     id: string;
+    questionId: string;
   };
 }) => {
-  const id = params.id;
+  const { id, questionId } = params;
   return (
     <div>
-      <QuestionIndex quizId={id} />
+      <QuestionIndex quizId={id} id={questionId} />
     </div>
   );
 };

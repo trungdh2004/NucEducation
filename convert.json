@@ -1,0 +1,39 @@
+{
+  "query": {
+    "text": "avsvds",
+    "image": "https://res.cloudinary.com/dundmo7q8/image/upload/v1735463058/nuceducation/bxjmj7xnd1opg5yyl5fi.jpg"
+  },
+  "_id": "677112ccea8378dca4a18fe4",
+  "aiGenerated": false,
+  "quizId": "676ed1300d795c5d8f340570",
+  "time": 30000,
+  "type": "SGQ",
+  "answer": [1],
+  "deleted": false,
+  "options": [
+    {
+      "text": "a",
+      "value": 0,
+      "_id": "677112ccea8378dca4a18fe5"
+    },
+    {
+      "text": "b",
+      "value": 1,
+      "_id": "677112ccea8378dca4a18fe6"
+    },
+    {
+      "text": "c",
+      "value": 2,
+      "_id": "677112ccea8378dca4a18fe7"
+    },
+    {
+      "text": "d",
+      "value": 3,
+      "_id": "677112ccea8378dca4a18fe8"
+    }
+  ],
+  "isPublic": false,
+  "createdAt": "2024-12-29T09:13:48.920Z",
+  "updatedAt": "2024-12-29T09:13:48.920Z",
+  "__v": 0
+}

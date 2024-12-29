@@ -53,3 +53,25 @@ export const quizUpdateValidator = z.object({
   }),
   difficulty: z.number().min(1, {}),
 });
+
+export const questionValidator = z.object({
+  query: z.object({
+    text: z.string().trim().min(1),
+    image: z.string().optional(),
+  }),
+  time: z.number(),
+  answer: z
+    .number()
+    .array()
+    .refine((data) => data.length >= 1),
+  quizId: z.string().trim().min(1),
+  options: z.array(
+    z.object({
+      text: z.string().trim().min(1, {
+        message:"Bạn chưa điền câu hỏi"
+      }),
+      value: z.number(),
+    })
+  ),
+  type: z.enum(["MTQ", "SGQ", "BLANK"]),
+});

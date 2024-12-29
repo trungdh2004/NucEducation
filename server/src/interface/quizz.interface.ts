@@ -4,11 +4,11 @@ export interface QuestionDto {
   type: "MTQ" | "SGQ" | "BLANK";
   query: {
     text: string;
-    image: string | null;
+    image?: string;
   };
-  answer: number | number[];
-  deleted: boolean;
+  answer: number[];
   options: OptionsQuestionDto[];
+  quizId: string;
 }
 
 export interface OptionsQuestionDto {

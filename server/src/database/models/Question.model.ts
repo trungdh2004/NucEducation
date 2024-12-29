@@ -14,6 +14,7 @@ export interface QuestionDocument extends Document {
   deleted: boolean;
   options: IOptionsQuestion[];
   quizId: string;
+  isPublic: boolean;
 }
 
 export interface IOptionsQuestion {
@@ -51,23 +52,31 @@ const questionSchema = new Schema(
         default: null,
       },
     },
-    answer: {
-      type: Schema.Types.Mixed,
-      required: true,
-    },
+    answer: [
+      {
+        type: Number,
+        required: true,
+      },
+    ],
     deleted: {
       type: Boolean,
       default: false,
     },
-    options: {
-      text: {
-        type: String,
-        required: true,
+    options: [
+      {
+        text: {
+          type: String,
+          required: true,
+        },
+        value: {
+          type: Number,
+          required: true,
+        },
       },
-      value: {
-        type: Number,
-        required: true,
-      },
+    ],
+    isPublic: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

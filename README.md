@@ -6,7 +6,7 @@ Một mô tả ngắn gọn, hấp dẫn về dự án của bạn.
 [Cung cấp liên kết đến bản demo hoặc ảnh chụp màn hình nếu có]
 
 ## 📚 Nội dung
-- [📖 Giới thiệu](#📖-giới-thiệu)
+- [Giới thiệu](#📖-giới-thiệu)
 - [Tính năng](#tính-năng)
 - [Cài đặt](#-cài-đặt)
 - [Sử dụng](#sử-dụng)

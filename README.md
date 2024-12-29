@@ -54,7 +54,9 @@ Hướng dẫn cài đặt dự án:
 2. Chạy phía frontend:
    ```bash
    cd client
+   
    ```bash
    npm i
+   
    ```bash
    npm run dev

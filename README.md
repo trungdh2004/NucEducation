@@ -37,11 +37,6 @@ Liệt kê các công nghệ, framework, hoặc thư viện được sử dụng
 ## 💻 Cài đặt
 
 Hướng dẫn cài đặt dự án:
-
-## Layout
-
-Hướng dẫn cài đặt dự án:
-
 ### Yêu cầu
 - Node.js >= 20.x
 - npm hoặc yarn
@@ -62,3 +57,6 @@ Hướng dẫn cài đặt dự án:
    ```bash
    npm run dev
    ```
+## Layout
+
+Hướng dẫn cài đặt dự án:

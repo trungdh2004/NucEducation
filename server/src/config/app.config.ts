@@ -18,6 +18,7 @@ const appConfig = () => ({
   CLOUDINARY_API_KEY: getEnv("CLOUDINARY_API_KEY"),
   CLOUDINARY_API_SECRET: getEnv("CLOUDINARY_API_SECRET"),
   CLOUDINARY_FOLDER_NAME: getEnv("CLOUDINARY_FOLDER_NAME"),
+  GEMINI_AI: getEnv("GEMINI_AI"),
 });
 
 export const config = appConfig();

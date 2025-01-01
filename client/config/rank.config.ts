@@ -1,4 +1,4 @@
- const rankConfig = [
+const rankConfig = [
   {
     value: 1,
     name: "Mầm non",
@@ -65,4 +65,14 @@
   },
 ];
 
-export default rankConfig
+export const getRank = (rank: number) => {
+  const findRank = rankConfig.find((item) => item.value === rank);
+
+  if (!findRank) {
+    return undefined;
+  }
+
+  return findRank;
+};
+
+export default rankConfig;

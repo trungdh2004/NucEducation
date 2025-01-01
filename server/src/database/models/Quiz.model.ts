@@ -95,9 +95,6 @@ const QuizSchema = new Schema(
       enum: [1, 2, 3], // Các giá trị cố định
       default: 1, // Giá trị mặc định
     },
-    description: {
-      type: String,
-    },
   },
   { timestamps: true }
 );

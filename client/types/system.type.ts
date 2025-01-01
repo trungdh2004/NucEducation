@@ -27,4 +27,11 @@ export interface ChangeSearch {
   pageSize?: number;
   keyword?: string;
   tab?: number;
+  sort?: 1 | -1;
+}
+
+export interface SearchQuizPaging extends Omit<SearchBase, "keyword"> {
+  sort: 1 | -1;
+  isLove?: boolean;
+  isPublic: boolean;
 }

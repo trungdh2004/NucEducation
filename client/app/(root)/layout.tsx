@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <AppSidebar />
       <div className="w-full lg:pl-[--sidebar-width] bg-main">
         <Header />
-        <div className="p-2 w-full min-h-screen">{children}</div>
+        <div className="p-2 w-full">{children}</div>
       </div>
     </SidebarProvider>
   );

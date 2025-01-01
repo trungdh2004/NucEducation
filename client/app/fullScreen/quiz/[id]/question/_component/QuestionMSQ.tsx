@@ -1,9 +1,8 @@
-import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import { FormControl, FormField } from "@/components/ui/form";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { CheckIcon, PlusIcon, Trash2 } from "lucide-react";
-import React from "react";
 import {
   useFieldArray,
   UseFieldArrayRemove,

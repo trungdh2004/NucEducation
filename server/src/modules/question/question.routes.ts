@@ -15,5 +15,19 @@ questionRouter.put(
   questionController.updateQuestion
 );
 questionRouter.get("/getOne/:id", questionController.getByIdQuestion);
-
+questionRouter.get(
+  "/copy/:id",
+  authentication,
+  questionController.copyQuestion
+);
+questionRouter.delete(
+  "/delete/:id",
+  authentication,
+  questionController.deleteIdQuestion
+);
+questionRouter.post(
+  "/createManyAI/:id",
+  authentication,
+  questionController.createManyQuestion
+);
 export default questionRouter;

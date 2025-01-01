@@ -22,9 +22,26 @@ export interface QuizDto {
 
 export interface QuizUpdateDto {
   name: string;
-  description: string;
   image: string;
   category: string;
   level: number;
   difficulty: number;
+}
+
+export interface QuestionAiDto {
+  type: "MTQ" | "SGQ" | "BLANK";
+  query: {
+    text: string;
+    image?: string;
+  };
+  answer: number[];
+  options: OptionsQuestionDto[];
+}
+
+export interface QuizPagingDto {
+  pageIndex: number;
+  pageSize: number;
+  isPublic: boolean;
+  sort: 1 | -1;
+  isLove?: boolean;
 }

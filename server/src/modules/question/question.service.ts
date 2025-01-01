@@ -1,6 +1,6 @@
 import QuestionModel from "../../database/models/Question.model";
 import { QuizModel } from "../../database/models/Quiz.model";
-import { QuestionDto } from "../../interface/quizz.interface";
+import { QuestionAiDto, QuestionDto } from "../../interface/quizz.interface";
 import { BadRequestException } from "../../utils/catch-errors";
 
 export class QuestionService {
@@ -58,7 +58,7 @@ export class QuestionService {
           image: data.query.image,
         },
         type: data.type,
-        answers: data.answer,
+        answer: data.answer,
         options: data.options,
         time: data.time,
         quizId: data.quizId,
@@ -81,5 +81,58 @@ export class QuestionService {
     }
 
     return existingQuestion;
+  }
+
+  public async delete(id: string) {
+    const existingQuestion = await QuestionModel.findById(id);
+
+    if (!existingQuestion) {
+      throw new BadRequestException("Không có câu hỏi");
+    }
+
+    const deleteQuestion = await QuestionModel.findByIdAndDelete(id);
+    return id;
+  }
+
+  public async copyQuestion(id: string) {
+    const question = await QuestionModel.findById(id);
+
+    if (!question) {
+      throw new BadRequestException("Không có câu hỏi đó");
+    }
+
+    const data = {
+      time: question.time,
+      type: question.type,
+      answer: question.answer,
+      query: question.query,
+      quizId: question.quizId,
+      options: question.options.map((option) => ({
+        text: option.text,
+        value: option.value,
+      })),
+    };
+
+    const newQuestion = await QuestionModel.create(data);
+
+    return newQuestion;
+  }
+
+  public async createMany(quizId: string, data: QuestionDto[]) {
+    const checkQuiz = await QuizModel.findById(quizId);
+
+    if (!checkQuiz) {
+      throw new BadRequestException("Không có bài tập");
+    }
+
+    console.log("data", data);
+
+    const newQuestion = await QuestionModel.create(data);
+
+    if (!newQuestion) {
+      throw new BadRequestException("Tạo thất bại");
+    }
+
+    return newQuestion;
   }
 }

@@ -24,7 +24,7 @@ const formSchema = z.object({
     }),
     image: z
       .object({
-        url: z.string().trim().min(1, {}),
+        url: z.string().trim().optional().nullable(),
         file: z.instanceof(File).optional(),
       })
       .optional(),
@@ -90,6 +90,8 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
     },
   });
 
+  console.log("form", form.formState.errors);
+
   const handleDefault = async (id: string) => {
     try {
       const data = await getOneQuestionApi(id);
@@ -97,7 +99,7 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
         query: {
           text: data.query.text,
           image: {
-            url: data.query.image,
+            url: data.query.image || "",
           },
         },
         time: data.time,
@@ -106,11 +108,13 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
         answer: data.answer,
         quizId: data.quizId,
       };
-      setImage(data.query.image);
+      setImage(data.query.image || "");
       form.reset(value);
       console.log("data", data);
       setLoading(false);
     } catch (error: unknown) {
+      console.error("error default question", error);
+
       toast.error("Lấy giá trị thất bại");
       router.push(`/fullScreen/quiz/${quizId}/edit`);
     }
@@ -154,12 +158,13 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
       };
 
       if (id) {
-        const res = await updateQuestionApi(id, data);
+        await updateQuestionApi(id, data);
       } else {
-        const res = await createQuestionApi(data);
+        await createQuestionApi(data);
       }
       router.push(`/fullScreen/quiz/${quizId}/edit`);
     } catch (error) {
+      console.error("error question", error);
       toast.error("Lưu thất bại");
     } finally {
       setClose();

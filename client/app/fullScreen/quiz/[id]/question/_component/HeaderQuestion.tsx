@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon, FileSymlinkIcon, SettingsIcon } from "lucide-react";
-import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import {
   Select,
   SelectContent,
@@ -12,26 +15,20 @@ import {
 } from "@/components/ui/select";
 import { timeQuestion, typeQuestion } from "@/config/appQuestion";
 import { cn } from "@/lib/utils";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
+import { ChevronLeftIcon, FileSymlinkIcon } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 interface IProps {
   quizId: string;
 }
 const HeaderQuestion = ({ quizId }: IProps) => {
   const form = useFormContext();
-  const { id } = useParams();
   const handleCheckForm = (errors: Record<string, any>): boolean => {
     return Object.keys(errors).length === 0;
   };
 
-  useEffect(() => {
-    
-  },[])
+  useEffect(() => {}, []);
 
   const handleMessage = (errors: Record<string, any>) => {
     const array = Object.keys(errors)
@@ -60,7 +57,7 @@ const HeaderQuestion = ({ quizId }: IProps) => {
           };
         }
       })
-      .sort((a, b) => -1);
+      .sort(() => -1);
 
     const findData = array.find((data) => {
       if (data?.err === "query") return true;

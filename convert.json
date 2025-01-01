@@ -1,39 +1,25 @@
 {
-  "query": {
-    "text": "avsvds",
-    "image": "https://res.cloudinary.com/dundmo7q8/image/upload/v1735463058/nuceducation/bxjmj7xnd1opg5yyl5fi.jpg"
+  "stats": {
+    "lesson": 0,
+    "totalCorrect": 0,
+    "totalQuestions": 0,
+    "totalPlayers": 0
   },
-  "_id": "677112ccea8378dca4a18fe4",
-  "aiGenerated": false,
-  "quizId": "676ed1300d795c5d8f340570",
-  "time": 30000,
-  "type": "SGQ",
-  "answer": [1],
+  "_id": "6772bd2a7d5f8e4a235efd9c",
+  "name": "Bài tập đẹp cực kì lun 123",
   "deleted": false,
-  "options": [
-    {
-      "text": "a",
-      "value": 0,
-      "_id": "677112ccea8378dca4a18fe5"
-    },
-    {
-      "text": "b",
-      "value": 1,
-      "_id": "677112ccea8378dca4a18fe6"
-    },
-    {
-      "text": "c",
-      "value": 2,
-      "_id": "677112ccea8378dca4a18fe7"
-    },
-    {
-      "text": "d",
-      "value": 3,
-      "_id": "677112ccea8378dca4a18fe8"
-    }
-  ],
+  "isLoved": false,
+  "createBy": {
+    "_id": "676a5ef47958b625fde476b6",
+    "name": "huutrung",
+    "avatar": "/avatar.jpg"
+  },
+  "lifetimeAccess": false,
+  "image": "https://res.cloudinary.com/dundmo7q8/image/upload/v1735309342/nuceducation/zzz8exzd4dnnlzcb6vdk.png",
+  "questions": [],
   "isPublic": false,
-  "createdAt": "2024-12-29T09:13:48.920Z",
-  "updatedAt": "2024-12-29T09:13:48.920Z",
+  "difficulty": 1,
+  "createdAt": "2024-12-30T15:32:58.492Z",
+  "updatedAt": "2024-12-30T15:32:58.492Z",
   "__v": 0
 }

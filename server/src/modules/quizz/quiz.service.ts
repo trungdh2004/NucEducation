@@ -1,6 +1,11 @@
+import { formatResponse } from "../../config/response";
 import QuestionModel from "../../database/models/Question.model";
 import { QuizModel } from "../../database/models/Quiz.model";
-import { QuizDto, QuizUpdateDto } from "../../interface/quizz.interface";
+import {
+  QuizDto,
+  QuizPagingDto,
+  QuizUpdateDto,
+} from "../../interface/quizz.interface";
 import { BadRequestException } from "../../utils/catch-errors";
 
 export class QuizService {
@@ -18,7 +23,15 @@ export class QuizService {
   }
 
   async findById(id: string) {
-    const exisQuiz = await QuizModel.findById(id);
+    const exisQuiz = await QuizModel.findById(id).populate([
+      {
+        path: "createBy",
+        select: "avatar name",
+      },
+      {
+        path: "category",
+      },
+    ]);
 
     if (!exisQuiz) {
       throw new BadRequestException("Không có bài viết");
@@ -35,18 +48,13 @@ export class QuizService {
   }
 
   async findByIdPrivate(id: string, userId: string) {
-    const exisQuiz = await QuizModel.findById(id);
+    const exisQuiz = await QuizModel.findById(id).populate("category");
 
     if (!exisQuiz) {
       throw new BadRequestException("Không có bài viết");
     }
 
-    console.log({
-      userId,
-      createdBy: exisQuiz.createBy.toString(),
-    });
-
-    if (exisQuiz.createBy.toString() !== userId) {
+    if (exisQuiz.createBy.toString() !== userId.toString()) {
       throw new BadRequestException("Bạn không có quyền truy cập");
     }
 
@@ -67,7 +75,7 @@ export class QuizService {
       throw new BadRequestException("Không có bài viết");
     }
 
-    if (exisQuiz.createBy.toString() !== userId) {
+    if (exisQuiz.createBy.toString() !== userId.toString()) {
       throw new BadRequestException("Bạn không có quyền");
     }
 
@@ -75,14 +83,13 @@ export class QuizService {
       id,
       {
         name: data.name,
-        description: data.description,
         level: data.level,
         image: data.image,
         category: data.category,
         difficulty: data.difficulty,
       },
       { new: true }
-    );
+    ).populate("category");
 
     return updateQuiz;
   }
@@ -118,5 +125,151 @@ export class QuizService {
     }
 
     return exisQuiz;
+  }
+
+  async paging(data: QuizPagingDto, user: string) {
+    const limit = data.pageSize || 10;
+    const skip = (data.pageIndex - 1) * limit || 0;
+
+    const queryLoved = data.isLove ? { isLoved: data.isLove } : {};
+
+    const listQuiz = await QuizModel.find({
+      ...queryLoved,
+      isPublic: data.isPublic,
+      createBy: user,
+      deleted: false,
+    })
+      .sort({ createdAt: data.sort })
+      .skip(skip)
+      .limit(limit)
+      .populate([
+        {
+          path: "createBy",
+          select: "name avatar",
+        },
+        {
+          path: "category",
+          select: "name",
+        },
+      ]);
+
+    const count = await QuizModel.countDocuments({
+      ...queryLoved,
+      isPublic: data.isPublic,
+      createBy: user,
+      deleted: false,
+    });
+
+    const res = formatResponse({
+      skip,
+      limit,
+      data: listQuiz,
+      count,
+    });
+
+    return res;
+  }
+
+  async delete(id: string, userId: string) {
+    const exisQuiz = await QuizModel.findById(id).populate([
+      {
+        path: "createBy",
+        select: "avatar name",
+      },
+      {
+        path: "category",
+      },
+    ]);
+
+    if (!exisQuiz) {
+      throw new BadRequestException("Không có bài viết");
+    }
+
+    if (exisQuiz.createBy.toString() !== userId.toString()) {
+      throw new BadRequestException("Bài tập không phải của bạn");
+    }
+
+    const update = await QuizModel.findByIdAndUpdate(
+      id,
+      {
+        deleted: true,
+      },
+      { now: true }
+    );
+
+    return update;
+  }
+
+  async loved(id: string, is: boolean) {
+    const exisQuiz = await QuizModel.findById(id).populate([
+      {
+        path: "createBy",
+        select: "avatar name",
+      },
+      {
+        path: "category",
+      },
+    ]);
+
+    if (!exisQuiz) {
+      throw new BadRequestException("Không có bài viết");
+    }
+
+    const update = await QuizModel.findByIdAndUpdate(
+      id,
+      {
+        isLoved: is,
+      },
+      { now: true }
+    );
+
+    return update;
+  }
+
+  async public(id: string, userId: string) {
+    const exisQuiz = await QuizModel.findById(id);
+
+    if (!exisQuiz) {
+      throw new BadRequestException("Không có bài viết");
+    }
+
+    if (!exisQuiz.image) {
+      throw new BadRequestException("Bài tập chưa có hình ảnh");
+    }
+
+    if (!exisQuiz.category) {
+      throw new BadRequestException("Bài tập chưa có chủ đề");
+    }
+
+    if (!exisQuiz.difficulty) {
+      throw new BadRequestException("Bài tập chưa có độ khó");
+    }
+
+    if (!exisQuiz.level) {
+      throw new BadRequestException("Bài tập chưa có cấp độ");
+    }
+
+    const question = await QuestionModel.exists({
+      quizId: id,
+    });
+
+    if (!question) {
+      throw new BadRequestException("Bài tập chưa có câu hỏi");
+    }
+
+    if (exisQuiz.createBy.toString() !== userId.toString()) {
+      throw new BadRequestException("Bạn không có quyền");
+    }
+
+    const update = await QuizModel.findByIdAndUpdate(
+      id,
+      {
+        isPublic: true,
+        publicAt: Date.now(),
+      },
+      { now: true }
+    );
+
+    return update;
   }
 }

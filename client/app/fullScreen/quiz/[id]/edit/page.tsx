@@ -1,7 +1,7 @@
-import React from "react";
 
-import type { Metadata, ResolvingMetadata } from "next";
 import { configApp } from "@/config/app.config";
+import type { Metadata, ResolvingMetadata } from "next";
+import { redirect } from "next/navigation";
 import QuizIndex from "./_component/QuizIndex";
 
 type Props = {
@@ -37,10 +37,14 @@ export async function generateMetadata(
   };
 }
 
-const page = async () => {
+const page = async ({ params }: Props) => {
+  const id = params.id;
+
+  if (!id) redirect("/");
   return (
     <div className="w-full">
-      <QuizIndex />
+      <QuizIndex id={id} />
+      {/* <QuizLoading /> */}
     </div>
   );
 };

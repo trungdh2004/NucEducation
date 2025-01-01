@@ -5,6 +5,7 @@ import categoryRouter from "../modules/category/category.routes";
 import uploadRouter from "../modules/upload/update.routes";
 import quizRouter from "../modules/quizz/quiz.routes";
 import questionRouter from "../modules/question/question.routes";
+import geminiRouter from "../modules/gemini/gemini.routes";
 
 const routes = Router();
 
@@ -14,5 +15,6 @@ routes.use("/category", categoryRouter);
 routes.use("/upload", uploadRouter);
 routes.use("/quiz", quizRouter);
 routes.use("/question", questionRouter);
+routes.use("/gemini", geminiRouter);
 
 export default routes;

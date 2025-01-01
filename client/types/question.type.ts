@@ -1,9 +1,11 @@
+export type TypeQuestion = "MTQ" | "SGQ" | "BLANK";
+
 export interface QuestionDto {
   time: number;
-  type: "MTQ" | "SGQ" | "BLANK";
+  type: TypeQuestion;
   query: {
     text: string;
-    image?: string;
+    image?: string | null;
   };
   answer: number[];
   options: OptionsQuestionDto[];
@@ -21,17 +23,17 @@ export interface IQuestionResponse {
   aiGenerated: boolean;
   quizId: string;
   time: number;
-  type: "MTQ" | "SGQ" | "BLANK";
+  type: TypeQuestion;
   answer: number[];
   deleted: boolean;
-  options: Option[];
+  options: IOption[];
   isPublic: boolean;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
 }
 
-export interface Option {
+export interface IOption {
   text: string;
   value: number;
   _id: string;
@@ -40,4 +42,16 @@ export interface Option {
 export interface Query {
   text: string;
   image: string;
+}
+
+export interface IQuestionAi {
+  _id: string;
+  query: {
+    text: string;
+    image: null;
+  };
+  aiGenerated: boolean;
+  type: string;
+  answer: number[];
+  options: OptionsQuestionDto[];
 }

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { asyncHandler } from "../../middleware/asyncHandler";
 import { QuizService } from "./quiz.service";
 import {
+  pagingQuizValidator,
   quizCreateValidator,
   quizUpdateValidator,
 } from "../../validators/quizz.validator";
@@ -37,7 +38,11 @@ export class QuizController {
       throw new BadRequestException("Chưa nhập id");
     }
 
-    const data = this.quizService.updateQuiz(id, body, user?._id as string);
+    const data = await this.quizService.updateQuiz(
+      id,
+      body,
+      user?._id as string
+    );
 
     return res.status(HTTPSTATUS.OK).json({
       message: "Update thành công",
@@ -86,12 +91,62 @@ export class QuizController {
     return res.status(HTTPSTATUS.OK).json(data);
   });
 
-  public deleteQuiz() {}
+  public deleteQuiz = asyncHandler(async (req: RequestUser, res: Response) => {
+    const { id } = req.params;
+    const user = req.user;
 
-  public loveQuiz() {}
+    if (!id) {
+      throw new BadRequestException("Chưa truyền id");
+    }
+
+    const data = await this.quizService.delete(id, user?._id as string);
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Xóa thành công",
+    });
+  });
+
+  public loveQuiz = asyncHandler(async (req: RequestUser, res: Response) => {
+    const { id } = req.params;
+    const { isLoved } = req.body;
+    const user = req.user;
+
+    if (!id) {
+      throw new BadRequestException("Chưa truyền id");
+    }
+
+    const data = await this.quizService.loved(id, !!isLoved);
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Đã thêm yêu thích",
+    });
+  });
 
   public publicQuiz = asyncHandler(async (req: RequestUser, res: Response) => {
     const { id } = req.params;
     const user = req.user;
+
+    if (!id) {
+      throw new BadRequestException("Chưa truyền id");
+    }
+
+    const data = await this.quizService.public(id, user?._id as string);
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
+
+  public pagingQuiz = asyncHandler(async (req: RequestUser, res: Response) => {
+    const body = pagingQuizValidator.parse(req.body);
+    const user = req.user;
+
+    const searchData = {
+      ...body,
+      sort: body.sort || -1,
+      ...(body.isLove ? { isLove: body.isLove } : {}),
+    };
+
+    const data = await this.quizService.paging(searchData, user?._id as string);
+
+    return res.status(HTTPSTATUS.OK).json(data);
   });
 }

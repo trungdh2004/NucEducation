@@ -39,3 +39,22 @@ export const timeQuestion = [
     value: 60000,
   },
 ];
+
+export const appDifficultyQuiz = [
+  {
+    name: "Dễ",
+    value: 1,
+  },
+  {
+    name: "Trung bình",
+    value: 2,
+  },
+  {
+    name: "Khó",
+    value: 3,
+  },
+];
+
+export const getDifficulty = (value: number) => {
+  return appDifficultyQuiz.find((item) => item.value === value);
+};

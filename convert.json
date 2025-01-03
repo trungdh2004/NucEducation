@@ -1,25 +1,15 @@
 {
-  "stats": {
-    "lesson": 0,
-    "totalCorrect": 0,
-    "totalQuestions": 0,
-    "totalPlayers": 0
-  },
-  "_id": "6772bd2a7d5f8e4a235efd9c",
-  "name": "Bài tập đẹp cực kì lun 123",
-  "deleted": false,
-  "isLoved": false,
-  "createBy": {
-    "_id": "676a5ef47958b625fde476b6",
-    "name": "huutrung",
-    "avatar": "/avatar.jpg"
-  },
-  "lifetimeAccess": false,
-  "image": "https://res.cloudinary.com/dundmo7q8/image/upload/v1735309342/nuceducation/zzz8exzd4dnnlzcb6vdk.png",
-  "questions": [],
-  "isPublic": false,
-  "difficulty": 1,
-  "createdAt": "2024-12-30T15:32:58.492Z",
-  "updatedAt": "2024-12-30T15:32:58.492Z",
+  "_id": "67766231a1057362e230fb28",
+  "name": "huutrung",
+  "userId": "676a5ef47958b625fde476b6",
+  "startPlay": "2025-01-02T09:34:01.844Z",
+  "lessonId": "677641a32786a844129b6588",
+  "totalCorrect": 0,
+  "totalWrong": 0,
+  "totalQuestionAnswer": 0,
+  "isRunning": true,
+  "question": [],
+  "createdAt": "2025-01-02T09:53:53.332Z",
+  "updatedAt": "2025-01-02T09:53:53.332Z",
   "__v": 0
 }

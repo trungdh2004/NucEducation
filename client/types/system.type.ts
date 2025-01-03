@@ -28,10 +28,12 @@ export interface ChangeSearch {
   keyword?: string;
   tab?: number;
   sort?: 1 | -1;
+  isPublic?: boolean;
+  isLoved?: boolean;
 }
 
 export interface SearchQuizPaging extends Omit<SearchBase, "keyword"> {
   sort: 1 | -1;
-  isLove?: boolean;
-  isPublic: boolean;
+  isLoved?: boolean;
+  isPublic?: boolean;
 }

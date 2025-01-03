@@ -142,7 +142,8 @@ export class QuizController {
     const searchData = {
       ...body,
       sort: body.sort || -1,
-      ...(body.isLove ? { isLove: body.isLove } : {}),
+      ...(body.isLoved ? { isLoved: body.isLoved } : {}),
+      ...(body.isPublic !== undefined ? { isPublic: body.isPublic } : {}),
     };
 
     const data = await this.quizService.paging(searchData, user?._id as string);

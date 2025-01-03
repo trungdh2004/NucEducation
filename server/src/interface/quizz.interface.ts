@@ -41,7 +41,7 @@ export interface QuestionAiDto {
 export interface QuizPagingDto {
   pageIndex: number;
   pageSize: number;
-  isPublic: boolean;
+  isPublic?: boolean;
   sort: 1 | -1;
-  isLove?: boolean;
+  isLoved?: boolean;
 }

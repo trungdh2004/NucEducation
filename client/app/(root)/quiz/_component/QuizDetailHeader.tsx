@@ -1,3 +1,4 @@
+import { lessonLiveApi } from "@/actions/lesson.action";
 import ConfirmDialog from "@/components/common/ConfirmDialog";
 import TooltipComponent from "@/components/common/TooltipComponent";
 import Logo from "@/components/root/header/Logo";
@@ -17,6 +18,7 @@ import {
   HeartIcon,
   HeartOffIcon,
   LinkIcon,
+  LoaderIcon,
   NotebookPenIcon,
   PenIcon,
   PlayIcon,
@@ -24,16 +26,42 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, useTransition } from "react";
 
 interface IProps {
   quiz: IQuizResponse;
   handleDelete: () => void;
   handleLoved: (isLove: boolean) => void;
+  handlePublic: () => void;
 }
 
-const QuizDetailHeader = ({ quiz, handleDelete, handleLoved }: IProps) => {
+const QuizDetailHeader = ({
+  quiz,
+  handleDelete,
+  handleLoved,
+  handlePublic,
+}: IProps) => {
+  const router = useRouter();
   const [openConfirm, setOpenConfirm] = useState(false);
+  const [isPending, setTransition] = useTransition();
+
+  const handleCreateLiveLesson = async () => {
+    setTransition(async () => {
+      try {
+        const data = await lessonLiveApi({
+          name: quiz.name,
+          type: "live",
+          quizId: quiz._id,
+          quizName: quiz.name,
+        });
+
+        router.push(`/fullScreen/activity/${data._id}`);
+      } catch (error: unknown) {
+        console.log("err lesson live", error);
+      }
+    });
+  };
 
   return (
     <>
@@ -175,13 +203,29 @@ const QuizDetailHeader = ({ quiz, handleDelete, handleLoved }: IProps) => {
                   <BookOpenCheck />
                   Giao bài
                 </Button>
-                <Button variant={"success"}>
-                  <PlayIcon /> Bắt đầu
+                <Button
+                  variant={"success"}
+                  onClick={() => {
+                    handleCreateLiveLesson();
+                  }}
+                >
+                  {isPending ? (
+                    <LoaderIcon className="animate-spin" />
+                  ) : (
+                    <PlayIcon />
+                  )}
+                  Bắt đầu
                 </Button>
               </>
             ) : (
               <>
-                <Button>Xuất bản</Button>
+                <Button
+                  onClick={() => {
+                    handlePublic();
+                  }}
+                >
+                  Xuất bản
+                </Button>
               </>
             )}
           </div>

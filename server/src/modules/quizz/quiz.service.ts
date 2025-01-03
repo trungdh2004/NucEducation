@@ -131,11 +131,13 @@ export class QuizService {
     const limit = data.pageSize || 10;
     const skip = (data.pageIndex - 1) * limit || 0;
 
-    const queryLoved = data.isLove ? { isLoved: data.isLove } : {};
+    const queryLoved = data.isLoved ? { isLoved: data.isLoved } : {};
+    const queryPublic =
+      data.isPublic !== undefined ? { isPublic: data.isPublic } : {};
 
     const listQuiz = await QuizModel.find({
       ...queryLoved,
-      isPublic: data.isPublic,
+      ...queryPublic,
       createBy: user,
       deleted: false,
     })
@@ -155,7 +157,7 @@ export class QuizService {
 
     const count = await QuizModel.countDocuments({
       ...queryLoved,
-      isPublic: data.isPublic,
+      ...queryPublic,
       createBy: user,
       deleted: false,
     });

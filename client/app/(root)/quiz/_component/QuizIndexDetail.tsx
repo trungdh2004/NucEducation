@@ -3,6 +3,7 @@ import {
   deleteQuizApi,
   getByIdQuizApi,
   lovedQuizApi,
+  publicQuizApi,
 } from "@/actions/quiz.action";
 import { IQuestionResponse } from "@/types/question.type";
 import { IQuizResponse } from "@/types/quizz.type";
@@ -46,7 +47,7 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
 
   const handleLoved = async (isLoved: boolean) => {
     try {
-      const data = await lovedQuizApi(id, isLoved);
+      await lovedQuizApi(id, isLoved);
       setQuiz((prev) => {
         return {
           ...prev,
@@ -54,8 +55,19 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
         };
       });
       toast.success(isLoved ? "Đã thêm vào yêu thích" : "Đã bỏ yêu thích");
-    } catch (error) {
+    } catch (error: unknown) {
+      console.log("error", error);
       toast.error("Cập nhập thất bại");
+    }
+  };
+
+  const handlePublic = async () => {
+    try {
+      await publicQuizApi(id);
+      handleDetail(id);
+    } catch (error: unknown) {
+      const err = error as Error;
+      toast.error(err.message);
     }
   };
 
@@ -96,6 +108,7 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
                 quiz={quiz as IQuizResponse}
                 handleDelete={handleDelete}
                 handleLoved={handleLoved}
+                handlePublic={handlePublic}
               />
 
               <div className="w-full grid grid-cols-12 gap-4 mt-4">

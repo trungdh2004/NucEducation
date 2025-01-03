@@ -4,6 +4,9 @@ import { ChevronLeftIcon, FileSymlinkIcon, SettingsIcon } from "lucide-react";
 import React, { useState } from "react";
 import QuizModel from "./QuizModel";
 import Link from "next/link";
+import { toast } from "sonner";
+import { publicQuizApi } from "@/actions/quiz.action";
+import { useRouter } from "next/navigation";
 
 interface Props {
   quiz: IQuizResponse;
@@ -11,7 +14,18 @@ interface Props {
 }
 
 const HeaderQuiz = ({ quiz, handleEditQuiz }: Props) => {
+  const router = useRouter();
   const [openModel, setOpenModel] = useState(false);
+
+  const handlePublic = async () => {
+    try {
+      await publicQuizApi(quiz._id);
+      router.push("/library");
+    } catch (error: unknown) {
+      const err = error as Error;
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div className="fixed top-0 left-0 ring-0 h-14 border-b bg-white w-full flex items-center justify-between px-2 sm:px-4 z-20">
@@ -37,7 +51,7 @@ const HeaderQuiz = ({ quiz, handleEditQuiz }: Props) => {
         >
           <SettingsIcon size={20} /> Cài đặt
         </Button>
-        <Button size={"sm"}>
+        <Button size={"sm"} onClick={handlePublic}>
           <FileSymlinkIcon size={20} /> Xuất bản
         </Button>
       </div>

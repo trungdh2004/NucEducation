@@ -98,6 +98,6 @@ export const pagingQuizValidator = z.object({
   pageIndex: z.number(),
   pageSize: z.number().min(1),
   sort: z.union([z.literal(1), z.literal(-1)]).optional(),
-  isLove: z.boolean().optional(),
-  isPublic: z.boolean(),
+  isLoved: z.boolean().optional(),
+  isPublic: z.boolean().optional(),
 });

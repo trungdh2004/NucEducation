@@ -32,11 +32,14 @@ const processQueue = (error: any) => {
 };
 
 const refreshTokenRequest = async (): Promise<any> => {
-  const response = await fetch(baseUrl + "/auth/refresh", {
+  const response = await fetch(baseUrl + "auth/refresh", {
     credentials: "include",
   });
 
   if (!response.ok) {
+    const res = await response.json();
+    console.log("res", res);
+
     throw new Error("Failed to refresh token");
   }
 
@@ -60,9 +63,12 @@ const fetchApi = async (url: string, options: OptionsFetch) => {
     body: body,
   };
 
-  const response = await fetch(`${baseUrl}/${url}`, initOptions);
-  const res = await response.json();
+  const fullUrl = new URL(url, baseUrl).toString();
+
+  const response = await fetch(fullUrl, initOptions);
+
   if (response.status !== 401) {
+    const res = await response.json();
     if (!response.ok) {
       throw res;
     }
@@ -116,7 +122,7 @@ const apiRequest = {
   get: async (url: string, options?: any) => {
     const urlRequest = url.startsWith("/") ? url.slice(1) : url;
 
-    return fetchApi(urlRequest, {
+    return await fetchApi(urlRequest, {
       method: "GET",
       body: null,
       ...options,

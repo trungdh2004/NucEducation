@@ -57,7 +57,12 @@ const LibraryQuizList = () => {
   };
 
   useEffect(() => {
-    handlePaging(searchObject);
+    handlePaging({
+      pageIndex: 1,
+      pageSize: 5,
+      isPublic: undefined,
+      sort: -1,
+    });
   }, []);
 
   return (

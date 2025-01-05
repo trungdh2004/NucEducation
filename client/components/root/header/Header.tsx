@@ -2,14 +2,12 @@ import { Button } from "@/components/ui/button";
 import { BellIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import HeaderTrigger from "./HeaderTrigger";
-import SearchCode from "./SearchCode";
 import SearchCodeClient from "./SearchCodeClient";
 
 const HeaderUser = dynamic(() => import("./HeaderUser"), {
   loading: () => <p>Loading...</p>,
   ssr: true,
 });
-
 
 const Header = () => {
   return (

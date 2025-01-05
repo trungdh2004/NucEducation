@@ -57,6 +57,7 @@ const CategoryTable = () => {
 
   useEffect(() => {
     handlePaging(searchObject);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangeSearch = (value: ChangeSearch) => {

@@ -30,6 +30,9 @@ export interface ChangeSearch {
   sort?: 1 | -1;
   isPublic?: boolean;
   isLoved?: boolean;
+  typeRunning?: number;
+  deleted?: boolean;
+  date?: Date;
 }
 
 export interface SearchQuizPaging extends Omit<SearchBase, "keyword"> {

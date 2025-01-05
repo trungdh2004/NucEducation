@@ -5,6 +5,7 @@ import { RequestUser } from "../../interface/config.interface";
 import {
   lessonPlayerValidator,
   lessonValidator,
+  pagingLessonValidator,
 } from "../../validators/lesson.validator";
 import { HTTPSTATUS } from "../../config/http.config";
 import { BadRequestException } from "../../utils/catch-errors";
@@ -49,6 +50,21 @@ export class LessonController {
         body.id,
         body.playerId
       );
+
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
+
+  public pagingLesson = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const body = pagingLessonValidator.parse(req.body);
+      const user = req.user;
+
+      const data = await this.lessonService.paging({
+        ...body,
+        deleted: body?.deleted || false,
+        createBy: user?._id as string,
+      });
 
       return res.status(HTTPSTATUS.OK).json(data);
     }

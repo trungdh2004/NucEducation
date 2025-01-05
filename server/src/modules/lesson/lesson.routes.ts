@@ -19,4 +19,5 @@ lessonRouter.get(
   authentication,
   lessonController.findByJoin
 );
+lessonRouter.post("/paging", authentication, lessonController.pagingLesson);
 export default lessonRouter;

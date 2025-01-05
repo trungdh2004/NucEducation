@@ -1,11 +1,12 @@
 import { funcDisturbance } from "../../common/funcArray";
+import { formatResponse } from "../../config/response";
 import LessonModel from "../../database/models/Lesson.model";
 import LessonQuestionModel, {
   QuestionDocument,
 } from "../../database/models/LessonQuestion";
 import QuestionModel from "../../database/models/Question.model";
 import { QuizModel } from "../../database/models/Quiz.model";
-import { ILessonDto } from "../../interface/lesson.interface";
+import { ILessonDto, ILessonPaging } from "../../interface/lesson.interface";
 import { BadRequestException } from "../../utils/catch-errors";
 import { generateOrderCode } from "../../utils/generateCode";
 import { playerService } from "../player/player.module";
@@ -40,6 +41,7 @@ export class LessonService {
       code,
       startAt: Date.now(),
       createBy: userId,
+      totalQuestions: listQuestion.length,
     });
 
     if (!newLesson) {
@@ -58,6 +60,12 @@ export class LessonService {
     }));
 
     await LessonQuestionModel.create(dataQuestion);
+
+    await QuizModel.findByIdAndUpdate(data.quizId, {
+      $inc: {
+        "stats.lesson": 1,
+      },
+    });
 
     return newLesson;
   }
@@ -115,5 +123,66 @@ export class LessonService {
     }
 
     return lesson;
+  }
+
+  async paging(data: ILessonPaging) {
+    const limit = data.pageSize || 10;
+    const skip = (data.pageIndex - 1) * limit || 0;
+
+    let queryDate = {};
+    let queryRunning = {};
+
+    if (data.date) {
+      const dateStart = new Date(data.date);
+      const endStart = new Date(data.date);
+      dateStart.setHours(0, 0, 0);
+      endStart.setHours(23, 59, 0);
+
+      queryDate = {
+        startAt: {
+          $gte: dateStart,
+          $lt: endStart,
+        },
+      };
+    }
+
+    if (data.typeRunning === 1) {
+      queryRunning = {
+        inRunning: true,
+      };
+    }
+
+    if (data.typeRunning === 2) {
+      queryRunning = {
+        inRunning: false,
+      };
+    }
+
+    const listLesson = await LessonModel.find({
+      ...queryDate,
+      ...queryRunning,
+      deleted: data.deleted,
+      createBy: data.createBy,
+    })
+      .skip(skip)
+      .limit(limit)
+      .sort({
+        createdAt: -1,
+      });
+
+    const count = await LessonModel.countDocuments({
+      ...queryDate,
+      ...queryRunning,
+      deleted: data.deleted,
+    });
+
+    const res = formatResponse({
+      skip,
+      limit,
+      data: listLesson,
+      count,
+    });
+
+    return res;
   }
 }

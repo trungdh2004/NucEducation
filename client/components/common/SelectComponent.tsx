@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Label } from "@/components/ui/label";
 import { ReactNode } from "react";
 import Select, { ActionMeta, GetOptionValue } from "react-select";

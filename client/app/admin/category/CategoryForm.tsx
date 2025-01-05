@@ -1,3 +1,4 @@
+'use client'
 import {
   createCateApi,
   getByIdCateApi,
@@ -156,6 +157,7 @@ const CategoryForm = ({ open, handleClose, handlePaging }: FormDialog) => {
         }
       })();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {

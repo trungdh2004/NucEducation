@@ -4,19 +4,15 @@ import Logo from "@/components/root/header/Logo";
 import { Button } from "@/components/ui/button";
 import { LessonResponseReview } from "@/types/lesson.type";
 import { CopyIcon, LinkIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const ActivityIndex = ({ id }: { id: string }) => {
   const router = useRouter();
-  const pathName = usePathname();
   const [lesson, setLesson] = useState<LessonResponseReview | null>(null);
   const [loading, setLoading] = useState(false);
-  const [listPlayer, setListPlayer] = useState([]);
-
-  console.log("pathName", pathName);
 
   useEffect(() => {
     (async () => {
@@ -32,6 +28,7 @@ const ActivityIndex = ({ id }: { id: string }) => {
         setLoading(false);
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleCopy = (text: string) => {
@@ -42,6 +39,7 @@ const ActivityIndex = ({ id }: { id: string }) => {
 
   return (
     <div>
+      {loading}
       <div className="fixed top-0 w-full z-20 h-20 bg-black/80 flex items-center justify-between px-4">
         <div>
           <Logo className="size-12" />

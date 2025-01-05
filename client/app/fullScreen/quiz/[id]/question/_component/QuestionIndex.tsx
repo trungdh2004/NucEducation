@@ -90,7 +90,6 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
     },
   });
 
-  console.log("form", form.formState.errors);
 
   const handleDefault = async (id: string) => {
     try {
@@ -126,7 +125,8 @@ const QuestionIndex = ({ quizId, id }: IProps) => {
     } else {
       setLoading(false);
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {

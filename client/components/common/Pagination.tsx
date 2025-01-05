@@ -8,6 +8,7 @@ interface Props {
   size?: "sm" | "md";
   forcePage: number;
   marginPagesDisplayed?: number;
+  className?: string;
 }
 
 function Paginations({
@@ -16,9 +17,10 @@ function Paginations({
   size = "md",
   forcePage = 0,
   marginPagesDisplayed = 2,
+  className,
 }: Props) {
   return (
-    <>
+    <div className={className}>
       {" "}
       {pageCount > 0 ? (
         <ReactPaginate
@@ -84,7 +86,7 @@ function Paginations({
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

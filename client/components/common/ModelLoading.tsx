@@ -1,13 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useLoadingModel } from "@/store/useLoadingModel";
 import { Loader2Icon } from "lucide-react";
-import React from "react";
-import { Dialog, DialogClose, DialogContent } from "../ui/dialog";
+import { Dialog, DialogContent } from "../ui/dialog";
 
 const ModelLoading = () => {
-  const { open, setClose } = useLoadingModel();
+  const { open } = useLoadingModel();
   return (
     <Dialog open={open} onOpenChange={() => {}}>
       <DialogContent className="hiddenClose bg-transparent border-none p-0 shadow-none flex flex-col items-center" >

@@ -14,6 +14,7 @@ export interface VerificationCodeDocument extends Document {
   totalCorrect: number;
   totalPlayers: number;
   class: string;
+  deleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -51,6 +52,7 @@ const LessonSchema = new Schema(
     },
     startAt: {
       type: Date,
+      default: Date.now(),
     },
     totalQuestions: {
       type: Number,
@@ -78,6 +80,10 @@ const LessonSchema = new Schema(
     },
     class: {
       type: Schema.Types.ObjectId,
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

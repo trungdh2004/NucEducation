@@ -27,7 +27,7 @@ const listMenuClient: any[] = [
 
   {
     title: "Báo cáo",
-    link: "/dashboard",
+    link: "/reports",
     icon: ChartPieIcon,
   },
   {

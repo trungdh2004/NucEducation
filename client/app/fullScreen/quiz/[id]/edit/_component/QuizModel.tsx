@@ -27,6 +27,7 @@ import { CateResponse } from "@/types/Category.type";
 import { IQuizResponse, IUpdateQuiz } from "@/types/quizz.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadIcon } from "lucide-react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -162,12 +163,15 @@ const QuizModel = ({ open, handleClose, initData, handleEditQuiz }: IProps) => {
                                 image ? "" : "hidden"
                               )}
                             >
-                              <img
+                              <Image
                                 src={image}
                                 className={cn(
                                   "aspect-[3/2] h-[140px] object-cover border border-slate-100"
                                 )}
                                 id="preview"
+                                width={150}
+                                height={150}
+                                alt=""
                               />
                             </div>
                           </div>

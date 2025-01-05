@@ -13,7 +13,12 @@ const PlayerResponseSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: true,
     },
-    response: [{ type: Number }],
+    lessonQuestionId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "LessonQuestion",
+    },
+    response: [{ type: Schema.Types.Mixed }],
     isCorrect: {
       type: Boolean,
     },

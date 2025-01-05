@@ -28,6 +28,7 @@ const PlayerSchema = new Schema(
     },
     endPlay: {
       type: Date,
+      default: null,
     },
     lessonId: {
       type: Schema.Types.ObjectId,

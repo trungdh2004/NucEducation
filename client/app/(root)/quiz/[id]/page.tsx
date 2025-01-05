@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import QuizIndexDetail from "../_component/QuizIndexDetail";
-import { getByIdQuizApi } from "@/actions/quiz.action";
 
 const page = async ({
   params,

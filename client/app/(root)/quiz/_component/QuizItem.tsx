@@ -62,8 +62,8 @@ const QuizItem = ({ data }: { data: IQuestionResponse }) => {
           </div>
         ) : (
           <>
-            {data.options?.map((option, index) => (
-              <div className="flex items-start gap-2">
+            {data.options?.map((option) => (
+              <div className="flex items-start gap-2" key={option._id}>
                 <div
                   className={cn(
                     "size-5 flex items-center justify-center border rounded-full",

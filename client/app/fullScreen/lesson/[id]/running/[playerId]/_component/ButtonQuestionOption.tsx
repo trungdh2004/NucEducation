@@ -8,6 +8,9 @@ interface IProps {
   type: TypeQuestion;
   selected: boolean;
   handleAnswer: (type: TypeQuestion, value: number | string) => void;
+  isSuccess?: boolean;
+  isPending: boolean;
+  status: "none" | "completed" | "wrong";
 }
 
 const ButtonQuestionOption = ({
@@ -17,17 +20,23 @@ const ButtonQuestionOption = ({
   selected,
   handleAnswer,
   isSuccess,
+  isPending,
+  status,
 }: IProps) => {
   return (
     <button
       className={cn(
         "h-full w-full sm:w-[calc(100%/var(--totalOptions))] rounded-lg bg-gradient-to-b from-[#3434c9] to-[#1a1a63]   border-b-4 hover:border-b-0 cursor-pointer border-[#0e0e38] p-2 group hover:bg-[#1a1a63]/80 disabled:opacity-80",
-        selected && "bg-[#1a1a63]/80 bg-none opacity-0"
+        selected && "bg-[#1a1a63]/80 bg-none",
+        status !== "none" &&
+          Boolean(isSuccess) === true &&
+          "bg-none bg-green-500 hover:bg-green-600",
+        status !== "none" && isSuccess === false && "opacity-0 "
       )}
       onClick={() => {
         handleAnswer(type, value);
       }}
-      disabled
+      disabled={isPending}
     >
       <div className="relative w-full h-full rounded-md">
         <div

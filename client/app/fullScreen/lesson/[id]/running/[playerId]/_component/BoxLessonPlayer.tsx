@@ -1,21 +1,15 @@
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import ButtonQuestionOption from "./ButtonQuestionOption";
-import { ILessonQuestion } from "@/types/lesson.type";
-import { Input } from "@/components/ui/input";
-import { IOption, TypeQuestion } from "@/types/question.type";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import FooterLessonPlayer from "./FooterLessonPlayer";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ILessonQuestion } from "@/types/lesson.type";
+import { IOption, TypeQuestion } from "@/types/question.type";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import ButtonQuestionOption from "./ButtonQuestionOption";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   answer: z.string().min(1, {
@@ -29,7 +23,11 @@ interface IProps {
   questionIndex: number;
   answer: (string | number)[];
   handleAnswer: (type: TypeQuestion, value: number | string) => void;
+  handleResponse: (type: TypeQuestion, value: string) => void;
   handleNextQuestion: () => void;
+  response: (string | number)[];
+  status: "none" | "completed" | "wrong";
+  isPending: boolean;
 }
 
 const BoxLessonPlayer = ({
@@ -38,7 +36,10 @@ const BoxLessonPlayer = ({
   questionIndex,
   answer,
   handleAnswer,
-  handleNextQuestion,
+  status,
+  response,
+  isPending,
+  handleResponse,
 }: IProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,7 +52,7 @@ const BoxLessonPlayer = ({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
-    handleNextQuestion();
+    handleResponse("BLANK", values.answer);
   }
 
   return (
@@ -61,7 +62,7 @@ const BoxLessonPlayer = ({
           <div className="w-full relative flex items-center justify-center py-3 h-full transition-all duration-300 ">
             <div className="max-sm:w-full min-w-[60%] filter backdrop-blur-md border border-gray-600 relative sm:h-min h-fit rounded-md">
               <div className="absolute px-3 py-1 -top-4 bg-gray-900 left-1/2 border border-gray-600 rounded-full -translate-x-1/2 text-white text-sm">
-                {questionIndex} / {totalQuestion}
+                {questionIndex + 1} / {totalQuestion}
               </div>
               <div className="text-white p-4 sm:p-6 h-full rounded-md">
                 <div className="w-full h-full flex flex-col gap-4 sm:flex-row overflow-y-auto items-center sm:overflow-y-hidden">
@@ -124,6 +125,19 @@ const BoxLessonPlayer = ({
                       </Button>
                     </form>
                   </Form>
+
+                  <div className="w-fit h-10 text-white ">
+                    <div
+                      className={cn(
+                        "px-3 py-2 bg-gray-500/50 rounded-sm",
+                        status === "completed" && "bg-green-500",
+                        status === "wrong" && "bg-red-500",
+                        status === "none" && "hidden"
+                      )}
+                    >
+                      {response?.[0]}
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -134,11 +148,31 @@ const BoxLessonPlayer = ({
                     type={question?.type}
                     answer={answer}
                     handleAnswer={handleAnswer}
+                    response={response}
+                    status={status}
+                    isPending={isPending}
                   />
                 )}
 
                 {question?.type === "MTQ" && (
-                  <FooterLessonPlayer handleNextQuestion={handleNextQuestion} />
+                  <div
+                    className={
+                      "w-full h-16 fixed bottom-0 flex items-center justify-between px-4 backdrop-blur-sm"
+                    }
+                  >
+                    <div></div>
+                    <div>
+                      <Button
+                        variant={"secondary"}
+                        disabled={isPending}
+                        onClick={() => {
+                          handleResponse("MTQ", "");
+                        }}
+                      >
+                        Nộp
+                      </Button>
+                    </div>
+                  </div>
                 )}
               </>
             )}
@@ -156,12 +190,18 @@ interface IPropList {
   type: TypeQuestion;
   answer: (string | number)[];
   handleAnswer: (type: TypeQuestion, value: number | string) => void;
+  response: (number | string)[];
+  status: "none" | "completed" | "wrong";
+  isPending: boolean;
 }
 function ListQuestionOptions({
   options,
   type,
   answer,
   handleAnswer,
+  response,
+  isPending,
+  status,
 }: IPropList) {
   return (
     <div
@@ -174,11 +214,15 @@ function ListQuestionOptions({
     >
       {options.map((option) => {
         const selected = answer.includes(option.value);
+        const success = response.includes(option.value);
+        const isSuccess = status === "none" ? undefined : success;
         console.log({
-          answer,
-          value: option.value,
-          selected,
+          status,
+          success,
+          isSuccess,
+          isBoolean: isSuccess === false,
         });
+
         return (
           <ButtonQuestionOption
             key={option._id}
@@ -186,6 +230,9 @@ function ListQuestionOptions({
             type={type}
             selected={selected}
             handleAnswer={handleAnswer}
+            isSuccess={isSuccess}
+            isPending={isPending}
+            status={status}
           />
         );
       })}

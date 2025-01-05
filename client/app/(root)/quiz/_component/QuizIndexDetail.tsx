@@ -22,9 +22,6 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
   const handleDetail = async (id: string) => {
     try {
       setLoading(true);
-      // await new Promise((resolve, reject) => {
-      //   setTimeout(resolve, 5000);
-      // });
       const data = await getByIdQuizApi(id);
       setQuiz(data.quiz);
       setQuestions(data.questions);
@@ -73,6 +70,7 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
 
   useEffect(() => {
     handleDetail(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

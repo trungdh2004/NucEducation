@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import React, { ReactNode } from "react";
 import Select, { ActionMeta, GetOptionValue } from "react-select";
 import { Label } from "../ui/label";
@@ -12,7 +14,7 @@ type ActionTypes =
   | "select-option"
   | "set-value";
 export const customStyles = {
-  control: (provided: any, state: any) => ({
+  control: (provided: any) => ({
     ...provided,
     width: "100%", // Làm cho control phủ toàn bộ chiều rộng
     border: "1px solid #e2e8f0",
@@ -118,7 +120,9 @@ const SelectPagingComponent = <T,>({
       } else {
         setOption([]);
       }
-    } catch (error) {}
+    } catch (error: unknown) {
+      console.log("error", error);
+    }
   };
 
   React.useEffect(() => {

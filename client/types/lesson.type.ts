@@ -1,5 +1,6 @@
 import { PlayerResponse } from "./player.type";
 import { IQuestionResponse } from "./question.type";
+import { SearchBase } from "./system.type";
 
 export interface LessonLiveRequest {
   name: string;
@@ -15,7 +16,7 @@ export interface LessonResponseReview {
   name: string;
   quizId: string;
   quizName: string;
-  type: string;
+  type: "live" | "always" | "exam";
   startAt: Date;
   totalQuestions: number;
   totalAnswers: number;
@@ -26,6 +27,7 @@ export interface LessonResponseReview {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
+  class: [];
 }
 
 export interface ILessonQuestion extends IQuestionResponse {
@@ -44,4 +46,10 @@ export interface LessonPlayerResponse {
   listQuestion: ILessonQuestion[];
   countIndex: number;
   countQuestion: number;
+}
+
+export interface IPagingLesson extends Omit<SearchBase, "keyword"> {
+  typeRunning: number;
+  date?: Date;
+  deleted?: boolean;
 }

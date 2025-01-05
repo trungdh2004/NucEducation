@@ -32,7 +32,7 @@ const QuizIndex = ({ id }: { id: string }) => {
         console.log("err", err);
       }
     })();
-  }, []);
+  }, [id]);
 
   const handleDeleteQuestion = async (id: string) => {
     try {
@@ -81,6 +81,7 @@ const QuizIndex = ({ id }: { id: string }) => {
         return newData;
       });
     } catch (error: unknown) {
+      console.log("error", error);
     } finally {
       setClose();
     }

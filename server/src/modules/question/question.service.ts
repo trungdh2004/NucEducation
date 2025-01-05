@@ -11,10 +11,6 @@ export class QuestionService {
       throw new BadRequestException("Không có bài tập");
     }
 
-    console.log("option", {
-      options: data.options,
-      answers: data.answer,
-    });
 
     const newQuestion = await QuestionModel.create({
       aiGenerated: data.aiGenerated,

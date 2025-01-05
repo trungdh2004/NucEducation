@@ -1,6 +1,6 @@
 import LibraryQuizList from "./_component/LibraryQuizList";
 
-const page = () => {
+const page = async () => {
   return <LibraryQuizList />;
 };
 

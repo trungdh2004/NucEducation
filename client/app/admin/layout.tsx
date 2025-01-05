@@ -1,6 +1,5 @@
 import HeaderAdmin from "@/components/admin/header/HeaderAdmin";
 import { SidebarAdmin } from "@/components/admin/SidebarAdmin";
-import ModelLoading from "@/components/common/ModelLoading";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import React from "react";
 

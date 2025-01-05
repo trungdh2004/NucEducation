@@ -9,6 +9,7 @@ export interface PlayerResponse {
   name: string;
   userId: string;
   startPlay: Date;
+  endPlay?: Date;
   lessonId: string;
   totalCorrect: number;
   totalWrong: number;
@@ -18,4 +19,11 @@ export interface PlayerResponse {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
+}
+
+export interface PlayerProceed {
+  lessonId: string;
+  playerId: string;
+  questionId: string;
+  response: (number | string)[];
 }

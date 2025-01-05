@@ -1,5 +1,10 @@
 import apiRequest from "@/lib/fetchApi";
-import { LessonLiveRequest, LessonPlayerResponse, LessonResponseReview } from "@/types/lesson.type";
+import {
+  IPagingLesson,
+  LessonLiveRequest,
+  LessonPlayerResponse,
+  LessonResponseReview,
+} from "@/types/lesson.type";
 
 export const lessonLiveApi = (obj: LessonLiveRequest) =>
   apiRequest.post("/lesson/createLive", obj);
@@ -12,3 +17,6 @@ export const lessonPlayerApi = (
   playerId: string
 ): Promise<LessonPlayerResponse> =>
   apiRequest.post("/lesson/playerLesson", { id, playerId });
+
+export const pagingLessonApi = (obj: IPagingLesson) =>
+  apiRequest.post("/lesson/paging/", obj);

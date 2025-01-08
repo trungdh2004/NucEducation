@@ -185,4 +185,78 @@ export class LessonService {
 
     return res;
   }
+
+  async findLessonCreateBy(id: string, userId: string) {
+    const lesson = await LessonModel.findOne({
+      _id: id,
+      createBy: userId,
+    });
+
+    if (!lesson) {
+      throw new BadRequestException("No lesson found");
+    }
+
+    return lesson;
+  }
+
+  async findLessonQuestion(lesson: string) {
+    const list = await LessonQuestionModel.find({
+      lessonId: lesson,
+    });
+
+    return list;
+  }
+
+  async reportsLesson(id: string, userId: string) {
+    const lesson = await this.findLessonCreateBy(id, userId);
+
+    const lessonQuestion = await this.findLessonQuestion(id);
+
+    const player = await playerService.playerLesson(id);
+
+    return {
+      lesson,
+      lessonQuestion,
+      player,
+    };
+  }
+
+  async endLesson(id: string, userId: string) {
+    const lesson = await this.findLessonCreateBy(id, userId);
+    if (!lesson.inRunning) {
+      throw new BadRequestException("Bài học đã kết thúc");
+    }
+
+    const update = await LessonModel.findByIdAndUpdate(
+      id,
+      {
+        inRunning: false,
+        endedAt: Date.now(),
+        code: null,
+      },
+      { now: true }
+    );
+
+    return update;
+  }
+
+  async joinCode(code: string) {
+    const lesson = await LessonModel.findOne({
+      code,
+    });
+
+    if (!lesson) {
+      throw new BadRequestException("không có");
+    }
+
+    if (!lesson.inRunning) {
+      throw new BadRequestException("Không còn hoạt động");
+    }
+
+    if (lesson.deleted) {
+      throw new BadRequestException("Đã bị xóa");
+    }
+
+    return lesson;
+  }
 }

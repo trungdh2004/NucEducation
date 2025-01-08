@@ -10,8 +10,10 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import Paginations from "@/components/common/Pagination";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const TableReports = () => {
+  const router = useRouter();
   const [searchObject, setSearchObject] = useState<IPagingLesson>({
     pageIndex: 1,
     pageSize: 5,
@@ -100,7 +102,7 @@ const TableReports = () => {
               </tr>
             </thead>
             <tbody>
-              {response.content.length === 0 && (
+              {response?.content?.length === 0 && (
                 <tr>
                   <td colSpan={7} className="text-center h-14">
                     Không có giá trị
@@ -112,6 +114,9 @@ const TableReports = () => {
                 <tr
                   className="partition-border cursor-pointer h-16 hover:bg-gray-100"
                   key={lesson._id}
+                  onDoubleClick={() => {
+                    router.push(`/reports/${lesson._id}`);
+                  }}
                 >
                   <td className="">
                     <div className="flex items-center gap-3 px-3">
@@ -167,19 +172,21 @@ const TableReports = () => {
                   </td>
                   <td>
                     <div className="flex items-center justify-center">
-                      <span
-                        className="px-2 py-1 rounded-sm text-xs border"
-                        onClick={() => {
-                          if (navigator.clipboard) {
-                            navigator.clipboard.writeText(lesson.code);
-                            toast.success(
-                              "Đã lưu mã code vào clipboard của bạn"
-                            );
-                          }
-                        }}
-                      >
-                        {lesson.code}
-                      </span>
+                      {lesson.code && (
+                        <span
+                          className="px-2 py-1 rounded-sm text-xs border"
+                          onClick={() => {
+                            if (navigator.clipboard) {
+                              navigator.clipboard.writeText(lesson.code);
+                              toast.success(
+                                "Đã lưu mã code vào clipboard của bạn"
+                              );
+                            }
+                          }}
+                        >
+                          {lesson.code}
+                        </span>
+                      )}
                     </div>
                   </td>
                   <td>
@@ -204,10 +211,13 @@ const TableReports = () => {
           </table>
 
           <div className="flex flex-col gap-2 sm:hidden">
-            {response.content.map((lesson) => (
+            {response?.content?.map((lesson) => (
               <div
                 className="w-full p-4 rounded-md bg-white box-shadow border flex flex-col gap-2"
                 key={lesson._id}
+                onDoubleClick={() => {
+                  router.push(`/reports/${lesson._id}`);
+                }}
               >
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
@@ -255,7 +265,7 @@ const TableReports = () => {
             ))}
           </div>
         </div>
-        {response.totalPages > 0 && (
+        {response?.totalPages > 0 && (
           <div className="mt-2 flex justify-center">
             <Paginations
               pageCount={1}

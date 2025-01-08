@@ -15,7 +15,6 @@ const ButtonCreateQuiz = () => {
       try {
         const { data } = await createQuizApi("Bài tập chưa có tiêu đề");
         router.push(`/fullScreen/quiz/${data._id}/edit`);
-        console.log("data", data);
       } catch (error: unknown) {
         const err = error as Error;
         toast.error(err.message);

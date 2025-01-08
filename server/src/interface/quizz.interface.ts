@@ -38,10 +38,22 @@ export interface QuestionAiDto {
   options: OptionsQuestionDto[];
 }
 
-export interface QuizPagingDto {
+export interface QuizPagingToUserDto {
   pageIndex: number;
   pageSize: number;
   isPublic?: boolean;
   sort: 1 | -1;
   isLoved?: boolean;
+}
+
+export interface QuizPagingDto {
+  pageIndex: number;
+  pageSize: number;
+  isPublic?: boolean;
+  sort: 1 | -1;
+  category?: string;
+  difficulty?: 1 | 2 | 3;
+  level?: number;
+  deleted?: boolean;
+  keyword?: string;
 }

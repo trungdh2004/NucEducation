@@ -30,7 +30,7 @@ const HeaderQuiz = ({ quiz, handleEditQuiz }: Props) => {
   return (
     <div className="fixed top-0 left-0 ring-0 h-14 border-b bg-white w-full flex items-center justify-between px-2 sm:px-4 z-20">
       <div className="flex items-center gap-4">
-        <Link href={`/quiz/${quiz._id}`}>
+        <Link href={`/quiz/${quiz?._id}`}>
           <Button variant={"outline"} size={"sm"}>
             <ChevronLeftIcon />
           </Button>

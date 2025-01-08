@@ -101,3 +101,15 @@ export const pagingQuizValidator = z.object({
   isLoved: z.boolean().optional(),
   isPublic: z.boolean().optional(),
 });
+
+export const pagingValidator = z.object({
+  pageIndex: z.number(),
+  pageSize: z.number().min(1),
+  sort: z.union([z.literal(1), z.literal(-1)]).optional(),
+  category: z.string().optional(),
+  difficulty: z.union([z.literal(1), z.literal(2), z.literal(3)]).optional(),
+  level: z.number().optional(),
+  isPublic: z.boolean().optional(),
+  deleted: z.boolean().optional(),
+  keyword: z.string().optional(),
+});

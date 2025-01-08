@@ -1,5 +1,7 @@
 import LessonModel from "../../database/models/Lesson.model";
-import LessonQuestionModel from "../../database/models/LessonQuestion";
+import LessonQuestionModel, {
+  QuestionDocument,
+} from "../../database/models/LessonQuestion";
 import PlayerModel from "../../database/models/Player.model";
 import PlayerResponseModel from "../../database/models/PlayerResponse";
 import { QuizModel } from "../../database/models/Quiz.model";
@@ -51,9 +53,9 @@ export class PlayerService {
       throw new BadRequestException("Không có cuộc chơi nào");
     }
 
-    if (!player.isRunning) {
-      throw new BadRequestException("Cuộc chơi đã kết thúc");
-    }
+    // if (!player.isRunning) {
+    //   throw new BadRequestException("Cuộc chơi đã kết thúc");
+    // }
 
     return player;
   }
@@ -153,6 +155,55 @@ export class PlayerService {
     return {
       player: player,
       questions: listQuestion,
+    };
+  }
+
+  public async playerLesson(id: string) {
+    const listPlayer = await PlayerModel.find({
+      lessonId: id,
+    });
+
+    return listPlayer;
+  }
+
+  public async findDetails(id: string) {
+    const player = await this.findById(id);
+
+    const listPlayerResponse = await PlayerResponseModel.find({
+      playerId: id,
+    }).populate("lessonQuestionId");
+
+    const response = listPlayerResponse.map((item) => {
+      const question = item.lessonQuestionId as QuestionDocument;
+
+      const query = question.query;
+      const answer = question.options.filter((option) => {
+        const check = question.answer.includes(option.value);
+        return check;
+      });
+
+      const response =
+        question.type === "BLANK"
+          ? item.response
+          : question.options
+              .filter((option) => {
+                const check = item.response.includes(option.value);
+                return check;
+              })
+              .map((option) => option.text);
+
+      return {
+        question,
+        query,
+        answer,
+        response,
+        isCorrect: item.isCorrect,
+      };
+    });
+
+    return {
+      player,
+      response,
     };
   }
 }

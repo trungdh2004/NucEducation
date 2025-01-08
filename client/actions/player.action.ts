@@ -12,3 +12,7 @@ export const finishPlayerApi = (id: string) =>
 
 export const dataFinishPlayerApi = (id: string) =>
   apiRequest.get("/player/dataFinish/" + id);
+
+
+export const detailsPlayerApi = (id: string) =>
+  apiRequest.get("/player/detailPlayer/" + id);

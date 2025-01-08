@@ -54,4 +54,18 @@ export class PlayerController {
       return res.status(HTTPSTATUS.OK).json(data);
     }
   );
+
+  public findDetailsPlayers = asyncHandler(
+    async (req: Request, res: Response) => {
+      const { id } = req.params;
+
+      if (!id) {
+        throw new BadRequestException("chưa có id");
+      }
+
+      const data = await this.playerService.findDetails(id);
+
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
 }

@@ -1,10 +1,12 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { QuestionDocument } from "./LessonQuestion";
 
 export interface PlayerResponseDocument extends Document {
   playerId: string;
   response: number[];
   isCorrect: boolean;
   lessonId: string;
+  lessonQuestionId: string | QuestionDocument;
 }
 
 const PlayerResponseSchema = new Schema(

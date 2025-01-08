@@ -1,5 +1,6 @@
 "use client";
-import { lessonFindJoinApi } from "@/actions/lesson.action";
+import { endLessonApi, lessonFindJoinApi } from "@/actions/lesson.action";
+import ConfirmDialog from "@/components/common/ConfirmDialog";
 import Logo from "@/components/root/header/Logo";
 import { Button } from "@/components/ui/button";
 import { LessonResponseReview } from "@/types/lesson.type";
@@ -13,6 +14,8 @@ const ActivityIndex = ({ id }: { id: string }) => {
   const router = useRouter();
   const [lesson, setLesson] = useState<LessonResponseReview | null>(null);
   const [loading, setLoading] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+
 
   useEffect(() => {
     (async () => {
@@ -28,13 +31,23 @@ const ActivityIndex = ({ id }: { id: string }) => {
         setLoading(false);
       }
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       toast.success("Đã copy mã vào clipboard");
     });
+  };
+
+  const handleEndLesson = async () => {
+    try {
+      await endLessonApi(id);
+      toast.success("Kết thúc thành công");
+      router.push(`/reports/${id}`)
+    } catch (error: unknown) {
+      console.log("erorr: ", error);
+    }
   };
 
   return (
@@ -134,6 +147,20 @@ const ActivityIndex = ({ id }: { id: string }) => {
           </div>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={openConfirm}
+        handleClose={() => {
+          setOpenConfirm(false);
+        }}
+        handleSubmit={() => {
+          handleEndLesson();
+          setOpenConfirm(false);
+        }}
+        successLabel="Kết thúc"
+        title="Kết thúc bài học"
+        description="Bạn có chắc chắn muốn kết thúc bài học không"
+      />
     </div>
   );
 };

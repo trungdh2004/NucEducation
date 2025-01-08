@@ -57,7 +57,7 @@ const HeaderReport = ({ searchObject, handleChangeSearchObject }: IProps) => {
                 });
               }}
             >
-              <SelectTrigger className="w-[180px]  py-1 px-2 bg-white h-8">
+              <SelectTrigger className="w-[120px] sm:w-[180px]  py-1 px-2 bg-white h-8">
                 <SelectValue className="bg-white text-sm py-1 px-2" />
               </SelectTrigger>
               <SelectContent>
@@ -75,7 +75,7 @@ const HeaderReport = ({ searchObject, handleChangeSearchObject }: IProps) => {
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[180px] shadow-sm py-1 px-2 bg-white h-8 border-black border text-black border-input text-sm hover:bg-gray-50"
+                    "w-[120px] sm:w-[180px] shadow-sm py-1 px-2 bg-white h-8 border-black border text-black border-input text-sm hover:bg-gray-50"
                     // !date && "text-muted-foreground"
                   )}
                 >

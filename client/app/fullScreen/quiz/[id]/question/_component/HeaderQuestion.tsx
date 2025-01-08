@@ -137,7 +137,7 @@ const HeaderQuestion = ({ quizId }: IProps) => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div>
+        {/* <div>
           <FormField
             control={form.control}
             name="time"
@@ -165,7 +165,7 @@ const HeaderQuestion = ({ quizId }: IProps) => {
               </FormItem>
             )}
           />
-        </div>
+        </div> */}
         <HoverCard openDelay={0}>
           <HoverCardTrigger>
             <div className="relative group">

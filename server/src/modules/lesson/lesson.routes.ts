@@ -20,4 +20,7 @@ lessonRouter.get(
   lessonController.findByJoin
 );
 lessonRouter.post("/paging", authentication, lessonController.pagingLesson);
+lessonRouter.put("/endLesson/:id", authentication, lessonController.endLesson);
+lessonRouter.get("/detail/:id", authentication, lessonController.lessonDetail);
+lessonRouter.post("/code", lessonController.joinCodeLesson);
 export default lessonRouter;

@@ -1,6 +1,6 @@
 import apiRequest from "@/lib/fetchApi";
 import { IUpdateQuiz } from "@/types/quizz.type";
-import { SearchQuizPaging } from "@/types/system.type";
+import { SearchQuizDiPaging, SearchQuizPaging } from "@/types/system.type";
 
 export const createQuizApi = async (name: string) =>
   await apiRequest.post("/quiz/create", {
@@ -33,3 +33,6 @@ export const lovedQuizApi = async (id: string, isLoved: boolean) =>
 
 export const publicQuizApi = async (id: string) =>
   await apiRequest.put("/quiz/public/" + id, {});
+
+export const pagingQuizDiApi = async (obj: SearchQuizDiPaging) =>
+  await apiRequest.post("/quiz/paging", obj);

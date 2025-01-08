@@ -4,6 +4,7 @@ import { QuizModel } from "../../database/models/Quiz.model";
 import {
   QuizDto,
   QuizPagingDto,
+  QuizPagingToUserDto,
   QuizUpdateDto,
 } from "../../interface/quizz.interface";
 import { BadRequestException } from "../../utils/catch-errors";
@@ -127,7 +128,7 @@ export class QuizService {
     return exisQuiz;
   }
 
-  async paging(data: QuizPagingDto, user: string) {
+  async pagingToUser(data: QuizPagingToUserDto, user: string) {
     const limit = data.pageSize || 10;
     const skip = (data.pageIndex - 1) * limit || 0;
 
@@ -173,15 +174,7 @@ export class QuizService {
   }
 
   async delete(id: string, userId: string) {
-    const exisQuiz = await QuizModel.findById(id).populate([
-      {
-        path: "createBy",
-        select: "avatar name",
-      },
-      {
-        path: "category",
-      },
-    ]);
+    const exisQuiz = await QuizModel.findById(id);
 
     if (!exisQuiz) {
       throw new BadRequestException("Không có bài viết");
@@ -273,5 +266,84 @@ export class QuizService {
     );
 
     return update;
+  }
+
+  async paging(data: QuizPagingDto) {
+    const limit = data.pageSize || 10;
+    const skip = (data.pageIndex - 1) * limit || 0;
+
+    const queryPublic =
+      data.isPublic !== undefined ? { isPublic: data.isPublic } : {};
+
+    const queryCategory = data.category
+      ? {
+          category: data.category,
+        }
+      : {};
+
+    let queryKeyword = data.keyword
+      ? {
+          name: {
+            $regex: data.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+    const queryDifficulty = data.difficulty
+      ? {
+          difficulty: data.difficulty,
+        }
+      : {};
+    const queryLevel = data.level
+      ? {
+          level: data.level,
+        }
+      : {};
+    const queryDeleted = data.deleted
+      ? {
+          deleted: data.deleted,
+        }
+      : {};
+
+    const listQuiz = await QuizModel.find({
+      ...queryPublic,
+      ...queryCategory,
+      ...queryDifficulty,
+      ...queryLevel,
+      ...queryDeleted,
+      ...queryKeyword,
+    })
+      .sort({ createdAt: data.sort })
+      .skip(skip)
+      .limit(limit)
+      .populate([
+        {
+          path: "createBy",
+          select: "name avatar",
+        },
+        {
+          path: "category",
+          select: "name",
+        },
+      ]);
+
+    const count = await QuizModel.countDocuments({
+      ...queryPublic,
+      ...queryCategory,
+      ...queryDifficulty,
+      ...queryLevel,
+      ...queryDeleted,
+      ...queryKeyword,
+    });
+
+    const res = formatResponse({
+      skip,
+      limit,
+      data: listQuiz,
+      count,
+    });
+
+    return res;
   }
 }

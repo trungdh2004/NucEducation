@@ -1,4 +1,5 @@
 "use client";
+import { joinCodeLessonApi } from "@/actions/lesson.action";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,7 +10,9 @@ import {
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DoorOpenIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -18,12 +21,13 @@ const formSchema = z.object({
     .min(1, {
       message: "Username must be at least 2 characters.",
     })
-    .max(7, {
-      message: "Phỉa đủ 7 kí tự",
+    .max(8, {
+      message: "Phỉa đủ 8 kí tự",
     }),
 });
 
 const SearchCode = ({ className }: { className?: string }) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,10 +36,15 @@ const SearchCode = ({ className }: { className?: string }) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const lesson = await joinCodeLessonApi(values.code);
+      router.push(`/fullScreen/join/${lesson?._id}`);
+    } catch (error: unknown) {
+      console.log("error", error);
+
+      toast.error("Không tìm thấy");
+    }
   }
 
   return (
@@ -57,7 +66,7 @@ const SearchCode = ({ className }: { className?: string }) => {
                 <Input
                   placeholder="Nhập"
                   {...field}
-                  maxLength={7}
+                  maxLength={8}
                   className="border-none pl-1 border-r"
                   onChange={(e) => {
                     const value = e.target.value;

@@ -5,6 +5,7 @@ import {
   CircleCheckIcon,
   CircleXIcon,
   CopyIcon,
+  EllipsisVertical,
   PencilIcon,
   RectangleHorizontalIcon,
   SparklesIcon,
@@ -108,7 +109,7 @@ const QuizQuestion = ({
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <div className="border rounded-sm p-1 flex items-center gap-1 cursor-pointer hover:bg-gray-50 ">
-                <CopyIcon size={14} />
+                <EllipsisVertical size={14} />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="bottom" align="end">

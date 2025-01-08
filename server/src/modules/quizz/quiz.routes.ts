@@ -14,6 +14,7 @@ quizRouter.get(
 quizRouter.put("/update/:id", authentication, quizController.updateQuiz);
 quizRouter.get("/findMeta/:id", quizController.getMeta);
 quizRouter.post("/paging", authentication, quizController.pagingQuiz);
+quizRouter.post("/pagingQuiz", quizController.paging);
 quizRouter.delete("/delete/:id", authentication, quizController.deleteQuiz);
 quizRouter.put("/loved/:id", authentication, quizController.loveQuiz);
 quizRouter.put("/public/:id", authentication, quizController.publicQuiz);

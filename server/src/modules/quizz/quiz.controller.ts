@@ -3,6 +3,7 @@ import { asyncHandler } from "../../middleware/asyncHandler";
 import { QuizService } from "./quiz.service";
 import {
   pagingQuizValidator,
+  pagingValidator,
   quizCreateValidator,
   quizUpdateValidator,
 } from "../../validators/quizz.validator";
@@ -99,7 +100,7 @@ export class QuizController {
       throw new BadRequestException("Chưa truyền id");
     }
 
-    const data = await this.quizService.delete(id, user?._id as string);
+    const data = await this.quizService.delete(id, user?.id as string);
 
     return res.status(HTTPSTATUS.OK).json({
       message: "Xóa thành công",
@@ -146,7 +147,23 @@ export class QuizController {
       ...(body.isPublic !== undefined ? { isPublic: body.isPublic } : {}),
     };
 
-    const data = await this.quizService.paging(searchData, user?._id as string);
+    const data = await this.quizService.pagingToUser(
+      searchData,
+      user?._id as string
+    );
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
+  public paging = asyncHandler(async (req: RequestUser, res: Response) => {
+    const body = pagingValidator.parse(req.body);
+
+    const searchData = {
+      ...body,
+      sort: body.sort || -1,
+      ...(body.isPublic !== undefined ? { isPublic: body.isPublic } : {}),
+    };
+
+    const data = await this.quizService.paging(searchData);
 
     return res.status(HTTPSTATUS.OK).json(data);
   });

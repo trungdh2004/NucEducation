@@ -18,6 +18,7 @@ export interface LessonResponseReview {
   quizName: string;
   type: "live" | "always" | "exam";
   startAt: Date;
+  endedAt?: Date | null;
   totalQuestions: number;
   totalAnswers: number;
   totalCorrect: number;

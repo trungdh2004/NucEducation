@@ -1,3 +1,5 @@
+import { ILessonQuestion } from "./lesson.type";
+
 export interface PlayerCreate {
   name: string;
   userId?: string;
@@ -26,4 +28,20 @@ export interface PlayerProceed {
   playerId: string;
   questionId: string;
   response: (number | string)[];
+}
+
+export interface IPlayerDetails {
+  player: PlayerResponse;
+  response: IPlayerResponse[];
+}
+
+export interface IPlayerResponse {
+  question: ILessonQuestion;
+  query: {
+    text: string;
+    image: string;
+  };
+  answer: { text: string; value: number; _id: string }[];
+  response: string[];
+  isCorrect: boolean;
 }

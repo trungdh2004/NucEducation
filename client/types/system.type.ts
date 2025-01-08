@@ -40,3 +40,13 @@ export interface SearchQuizPaging extends Omit<SearchBase, "keyword"> {
   isLoved?: boolean;
   isPublic?: boolean;
 }
+
+export interface SearchQuizDiPaging extends Omit<SearchBase, "keyword"> {
+  isPublic?: boolean;
+  sort: 1 | -1;
+  category?: string;
+  difficulty?: 1 | 2 | 3;
+  level?: number;
+  deleted?: boolean;
+  keyword?: string;
+}

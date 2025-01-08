@@ -20,3 +20,14 @@ export const lessonPlayerApi = (
 
 export const pagingLessonApi = (obj: IPagingLesson) =>
   apiRequest.post("/lesson/paging/", obj);
+
+export const detailLessonApi = (id: string) =>
+  apiRequest.get("/lesson/detail/" + id);
+
+export const endLessonApi = (id: string) =>
+  apiRequest.put("/lesson/endLesson/" + id, {});
+
+export const joinCodeLessonApi = (code: string) =>
+  apiRequest.post("/lesson/code", {
+    code,
+  });

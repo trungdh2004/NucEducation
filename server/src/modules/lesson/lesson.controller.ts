@@ -69,4 +69,47 @@ export class LessonController {
       return res.status(HTTPSTATUS.OK).json(data);
     }
   );
+
+  public lessonDetail = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const { id } = req.params;
+      const user = req.user;
+
+      if (!id) {
+        throw new BadRequestException("Chưa truyền id");
+      }
+
+      const data = await this.lessonService.reportsLesson(
+        id,
+        user?.id as string
+      );
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
+
+  public endLesson = asyncHandler(async (req: RequestUser, res: Response) => {
+    const { id } = req.params;
+    const user = req.user;
+
+    if (!id) {
+      throw new BadRequestException("chưa nhập id");
+    }
+
+    const data = await this.lessonService.endLesson(id, user?.id);
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
+
+  public joinCodeLesson = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const { code } = req.body;
+      if (!code) {
+        throw new BadRequestException("Chưa truyền mã ");
+      }
+
+      const data = await this.lessonService.joinCode(code);
+
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
 }

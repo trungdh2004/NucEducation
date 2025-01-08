@@ -58,7 +58,9 @@ const LibraryQuizItem = ({ data }: Props) => {
             <div className="w-full flex items-center text-sm">
               <div className="flex items-center mr-3">
                 <List className="w-[14px] h-[14px] mr-1" />
-                <span className="text-xs leading-3">12 câu hỏi</span>
+                <span className="text-xs leading-3">
+                  {data.stats.totalQuestions || 0} câu hỏi
+                </span>
               </div>
               <div className="flex items-center mr-3">
                 <GraduationCap className="w-[14px] h-[14px] mr-1" />

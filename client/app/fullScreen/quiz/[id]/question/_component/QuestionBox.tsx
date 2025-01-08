@@ -52,7 +52,6 @@ const QuestionBox = ({ image, setImage }: IProps) => {
                         }
 
                         const url = URL.createObjectURL(file);
-                        console.log("url", url);
                         setImage(url);
                         field.onChange({
                           url: url,
@@ -69,7 +68,7 @@ const QuestionBox = ({ image, setImage }: IProps) => {
             <div className="flex-1 mt-2 flex items-center gap-2">
               <div
                 className={cn(
-                  "h-full aspect-square border rounded-md overflow-hidden hidden p-1  items-center justify-center",
+                  "h-full aspect-square border rounded-md overflow-hidden hidden p-1  items-center justify-center relative",
                   image && "flex"
                 )}
               >
@@ -80,6 +79,7 @@ const QuestionBox = ({ image, setImage }: IProps) => {
                   height={160}
                   className="aspect-square h-full object-cover rounded-sm"
                 />
+                <div className="absolute top-1 right-1 size-8 border rounded-sm"></div>
               </div>
               <FormField
                 control={form.control}

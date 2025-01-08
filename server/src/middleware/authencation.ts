@@ -15,7 +15,6 @@ const authentication = asyncHandler(
   async (req: RequestUser, res: Response, next: NextFunction) => {
     const token = req.cookies?.accessToken;
 
-
     if (!token) {
       throw new UnauthorizedException(
         "User not authorized",
@@ -47,6 +46,7 @@ const authentication = asyncHandler(
         ErrorCode.AUTH_UNAUTHORIZED_ACCESS
       );
     }
+
 
     req.user = user;
     req.sessionId = payload.sessionId as string;

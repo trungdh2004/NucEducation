@@ -35,4 +35,6 @@ export const publicQuizApi = async (id: string) =>
   await apiRequest.put("/quiz/public/" + id, {});
 
 export const pagingQuizDiApi = async (obj: SearchQuizDiPaging) =>
-  await apiRequest.post("/quiz/paging", obj);
+  await apiRequest.post("/quiz/pagingQuiz", obj);
+
+export const listQuizHotApi = async () => await apiRequest.get("/quiz/listHot");

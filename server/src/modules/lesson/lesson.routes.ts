@@ -9,11 +9,7 @@ lessonRouter.post(
   authentication,
   lessonController.createLiveLesson
 );
-lessonRouter.post(
-  "/playerLesson",
-  authentication,
-  lessonController.playerLesson
-);
+lessonRouter.post("/playerLesson", lessonController.playerLesson);
 lessonRouter.get(
   "/findByJoin/:id",
   authentication,

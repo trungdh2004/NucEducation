@@ -91,4 +91,10 @@ export class CategoryController {
       data,
     });
   });
+
+  public getAll = asyncHandler(async (req: Request, res: Response) => {
+    const data = await this.categoryService.getAll();
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
 }

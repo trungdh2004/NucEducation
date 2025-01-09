@@ -15,6 +15,7 @@ import { LoaderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -44,6 +45,9 @@ const JoinLessonIndex = ({ lessonId }: { lessonId: string }) => {
         console.log("data", data);
       } catch (error: unknown) {
         console.log("error", error);
+        const err = error as Error;
+        toast.error(err.message);
+        router.push(`/`);
       }
     });
   }

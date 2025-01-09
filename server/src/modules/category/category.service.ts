@@ -108,4 +108,12 @@ export class CategoryService {
 
     return exisCate;
   }
+
+  public async getAll() {
+    const exisCate = await CategoryModel.find({
+      deleted: false,
+    });
+
+    return exisCate;
+  }
 }

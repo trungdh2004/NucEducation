@@ -45,8 +45,20 @@ export interface SearchQuizDiPaging extends Omit<SearchBase, "keyword"> {
   isPublic?: boolean;
   sort: 1 | -1;
   category?: string;
-  difficulty?: 1 | 2 | 3;
+  difficulty?: number;
   level?: number;
   deleted?: boolean;
   keyword?: string;
+}
+
+export interface ChangeSearchQuizDiPaging {
+  pageIndex?: number;
+  pageSize?: number;
+  keyword?: string;
+  isPublic?: boolean;
+  sort?: 1 | -1;
+  category?: string;
+  difficulty?: number;
+  level?: number;
+  deleted?: boolean;
 }

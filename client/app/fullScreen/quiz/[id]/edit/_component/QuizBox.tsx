@@ -1,13 +1,13 @@
+import { copyQuestionApi } from "@/actions/question.action";
+import ConfirmDialog from "@/components/common/ConfirmDialog";
 import { Button } from "@/components/ui/button";
 import { IQuestionResponse } from "@/types/question.type";
-import { Plus, PlusIcon, Search } from "lucide-react";
+import { Plus, PlusIcon } from "lucide-react";
 import Link from "next/link";
-import QuizQuestion from "./QuizQuestion";
-import ConfirmDialog from "@/components/common/ConfirmDialog";
-import { useState } from "react";
-import { copyQuestionApi } from "@/actions/question.action";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
+import QuizQuestion from "./QuizQuestion";
 
 interface Props {
   questions: IQuestionResponse[];
@@ -38,10 +38,10 @@ const QuizBox = ({ questions, id, handleDeleteQuestion }: Props) => {
       <div className="w-full border rounded-md p-2 bg-white box-shadow flex justify-between items-center sticky top-14">
         <div className="text-lg font-semibold">{questions?.length} câu hỏi</div>
         <div className="flex gap-2">
-          <Button variant={"outline"} size={"sm"}>
+          {/* <Button variant={"outline"} size={"sm"}>
             <Search size={16} />
             Tìm kiếm câu hỏi
-          </Button>
+          </Button> */}
           <Link href={`/fullScreen/quiz/${id}/question`}>
             <Button variant={"outline"} size={"sm"}>
               <PlusIcon size={16} />

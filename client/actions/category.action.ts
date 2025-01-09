@@ -29,3 +29,6 @@ export const unDeleteCateApi = (
   id: string
 ): Promise<{ message: string; data: CateResponse }> =>
   apiRequest.delete("/category/unDelete/" + id);
+
+export const getAllCateApi = (): Promise<CateResponse[]> =>
+  apiRequest.get("/category/getAll");

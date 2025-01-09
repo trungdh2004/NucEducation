@@ -26,5 +26,6 @@ categoryRouter.delete(
   categoryController.unDeleteCategory
 );
 categoryRouter.get("/getById/:id", categoryController.getOne);
+categoryRouter.get("/getAll", categoryController.getAll);
 
 export default categoryRouter;

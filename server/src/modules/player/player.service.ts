@@ -78,7 +78,11 @@ export class PlayerService {
     if (question.type === "SGQ") {
       check = answer.includes(response[0]);
     } else if (question.type === "MTQ") {
-      check = !answer.some((value) => !response.includes(value));
+      if (answer.length !== response.length) {
+        check = false;
+      } else {
+        check = !answer.some((value) => !response.includes(value));
+      }
     } else if (question.type === "BLANK") {
       check =
         options[0].text.toString().toLocaleLowerCase() ===

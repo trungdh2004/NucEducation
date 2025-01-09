@@ -302,9 +302,9 @@ export class QuizService {
       : {};
     const queryDeleted = data.deleted
       ? {
-          deleted: data.deleted,
+          deleted:true,
         }
-      : {};
+      : { deleted: false };
 
     const listQuiz = await QuizModel.find({
       ...queryPublic,
@@ -336,14 +336,27 @@ export class QuizService {
       ...queryDeleted,
       ...queryKeyword,
     });
-
     const res = formatResponse({
-      skip,
+      skip: data.pageIndex,
       limit,
       data: listQuiz,
       count,
     });
 
     return res;
+  }
+
+  async listQuizHot() {
+    const list = await QuizModel.find({
+      deleted: false,
+      isPublic: true,
+    })
+      .sort({
+        "stats.totalPlayers": -1,
+      })
+      .limit(8)
+      .populate("category");
+
+    return list;
   }
 }

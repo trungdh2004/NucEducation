@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
-  BookmarkIcon,
   BookMinusIcon,
   BookUserIcon,
   ChartPieIcon,
@@ -34,11 +33,6 @@ const listMenuClient: any[] = [
     title: "Bài viết",
     link: "/blogs",
     icon: BookMinusIcon,
-  },
-  {
-    title: "Yêu thích",
-    link: "/heart",
-    icon: BookmarkIcon,
   },
 ];
 

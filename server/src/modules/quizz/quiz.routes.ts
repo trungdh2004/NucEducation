@@ -18,5 +18,6 @@ quizRouter.post("/pagingQuiz", quizController.paging);
 quizRouter.delete("/delete/:id", authentication, quizController.deleteQuiz);
 quizRouter.put("/loved/:id", authentication, quizController.loveQuiz);
 quizRouter.put("/public/:id", authentication, quizController.publicQuiz);
+quizRouter.get("/listHot", quizController.listHot);
 
 export default quizRouter;

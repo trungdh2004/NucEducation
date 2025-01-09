@@ -167,4 +167,9 @@ export class QuizController {
 
     return res.status(HTTPSTATUS.OK).json(data);
   });
+  public listHot = asyncHandler(async (req: RequestUser, res: Response) => {
+    const data = await this.quizService.listQuizHot();
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
 }

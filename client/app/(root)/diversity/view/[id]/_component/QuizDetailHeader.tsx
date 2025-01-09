@@ -3,31 +3,17 @@ import ConfirmDialog from "@/components/common/ConfirmDialog";
 import TooltipComponent from "@/components/common/TooltipComponent";
 import Logo from "@/components/root/header/Logo";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { getRank } from "@/config/rank.config";
 import { IQuizResponse } from "@/types/quizz.type";
 import {
-  Bookmark,
   BookOpenCheck,
-  EllipsisVerticalIcon,
-  HeartIcon,
-  HeartOffIcon,
-  LinkIcon,
   LoaderIcon,
   NotebookPenIcon,
-  PenIcon,
   PlayIcon,
-  Trash2Icon,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 
 interface IProps {
   quiz: IQuizResponse;
@@ -36,12 +22,7 @@ interface IProps {
   handlePublic: () => void;
 }
 
-const QuizDetailHeader = ({
-  quiz,
-  handleDelete,
-  handleLoved,
-  handlePublic,
-}: IProps) => {
+const QuizDetailHeader = ({ quiz, handleDelete }: IProps) => {
   const router = useRouter();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [isPending, setTransition] = useTransition();
@@ -144,92 +125,27 @@ const QuizDetailHeader = ({
           </div>
         </div>
         <div className="flex sm:items-center justify-between flex-col gap-2 sm:flex-row">
-          <div>
-            <div className="flex items-center gap-2">
-              <Link href={`/fullScreen/quiz/${quiz._id}/edit`}>
-                <Button variant={"outline"} size={"sm"}>
-                  <PenIcon size={20} /> Chỉnh sửa
-                </Button>
-              </Link>
-
-              {quiz.isLoved ? (
-                <Button
-                  variant={"destructive"}
-                  size={"sm"}
-                  onClick={() => handleLoved(false)}
-                >
-                  <HeartOffIcon size={20} />
-                </Button>
-              ) : (
-                <Button
-                  variant={"outline"}
-                  size={"sm"}
-                  onClick={() => handleLoved(true)}
-                >
-                  <HeartIcon size={20} />
-                </Button>
-              )}
-
-              <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild>
-                  <Button variant={"outline"} size={"sm"}>
-                    <EllipsisVerticalIcon />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {quiz.isPublic && (
-                    <>
-                      <DropdownMenuItem>
-                        <LinkIcon /> Copy link
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Bookmark /> Lưu bài tập
-                      </DropdownMenuItem>
-                    </>
-                  )}
-
-                  <DropdownMenuItem onClick={() => setOpenConfirm(true)}>
-                    <Trash2Icon />
-                    Xóa
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
+          <div></div>
 
           <div className="flex items-center gap-2">
-            {quiz.isPublic ? (
-              <>
-                <Button variant={"warning"}>
-                  {" "}
-                  <BookOpenCheck />
-                  Giao bài
-                </Button>
-                <Button
-                  variant={"success"}
-                  onClick={() => {
-                    handleCreateLiveLesson();
-                  }}
-                >
-                  {isPending ? (
-                    <LoaderIcon className="animate-spin" />
-                  ) : (
-                    <PlayIcon />
-                  )}
-                  Bắt đầu
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  onClick={() => {
-                    handlePublic();
-                  }}
-                >
-                  Xuất bản
-                </Button>
-              </>
-            )}
+            <Button variant={"warning"}>
+              {" "}
+              <BookOpenCheck />
+              Giao bài
+            </Button>
+            <Button
+              variant={"success"}
+              onClick={() => {
+                handleCreateLiveLesson();
+              }}
+            >
+              {isPending ? (
+                <LoaderIcon className="animate-spin" />
+              ) : (
+                <PlayIcon />
+              )}
+              Bắt đầu
+            </Button>
           </div>
         </div>
       </div>

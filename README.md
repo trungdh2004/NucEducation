@@ -3,7 +3,7 @@
 NucEducation là trang web giúp mọi người có thể tạo các câu hỏi trắc nghiệm, cuộc chơi cho mỗi bài quiz, tích hợp AI Gemini để giúp người tạo dễ dàng tìm các câu hỏi tương tự và sử dụng vào bài tập
 
 ## 📚 Nội dung
-- [Giới thiệu](#📖-giới-thiệu)
+- [Giới thiệu](#giới-thiệu)
 - [Tính năng](#tính-năng)
 - [Cài đặt](#-cài-đặt)
 - [Layout](#layout)
@@ -64,5 +64,32 @@ Hướng dẫn cài đặt dự án:
    ```
 ## Layout
 
-1. Trang chủ
-   
+### 1.Trang chủ
+   ![Hình ảnh trang chủ](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676202/quiz/psmz76y9u5xvbtzpcb8c.png)
+### 2.Đa dạng
+![Hình ảnh trang chủ](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676204/quiz/iubkde5mlppnhglmsrrc.png)
+### 3.Thư viện
+![Hình ảnh trang chủ](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676202/quiz/qsir0key4welj9myni7c.png)
+#### - Chi tiết bài tập
+![Hình ảnh chi tiết](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676202/quiz/oyun9ny35eljhtyms571.png)
+#### - Chỉnh sửa bài tập
+![Hình ảnh chi tiết](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676203/quiz/id4hg8go4p4xo7y2tkq9.png)
+#### - Gemini tạo câu hỏi
+![Hình ảnh chi tiết](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676202/quiz/rqxdpaefdm4hdgjfp0lp.png)
+#### - Tạo và chỉnh sửa câu hỏi
+![Hình ảnh chi tiết](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676203/quiz/iyobteypvyxoads5b3bu.png)
+### 4.Báo cáo
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676203/quiz/jz0rcazzqfvpfkprq0gb.png)
+#### - Chi tiết báo cáo
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676204/quiz/pgh23hklhzwxjuqm8dri.png)
+#### - Chi tiết câu trả lời người chơi
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676204/quiz/cvncsjwzg0ab1o9rpeui.png)
+#### - Chi tiết thống kê câu hỏi
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676204/quiz/mcpd57aefqi1156ajmai.png)
+
+### 5.Tham gia chơi
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676206/quiz/mrqdajwsflzahcsk6vto.png)
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676206/quiz/nc6k253jlgtlz8grlgjb.png)
+![Báo cáo](https://res.cloudinary.com/dundmo7q8/image/upload/v1736676203/quiz/nvkijqfnusvlqvmqgxo1.png)
+
+

@@ -3,8 +3,8 @@
 NucEducation là trang web giúp mọi người có thể tạo các câu hỏi trắc nghiệm, cuộc chơi cho mỗi bài quiz, tích hợp AI Gemini để giúp người tạo dễ dàng tìm các câu hỏi tương tự và sử dụng vào bài tập
 
 ## 📚 Nội dung
-- [Giới thiệu](#giới-thiệu)
-- [Tính năng](#tính-năng)
+- [Giới thiệu](#-giới-thiệu)
+- [Tính năng](#-tính-năng)
 - [Cài đặt](#-cài-đặt)
 - [Layout](#layout)
 

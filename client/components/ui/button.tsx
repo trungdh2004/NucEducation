@@ -24,6 +24,7 @@ const buttonVariants = cva(
           "bg-green-400 border-b-[3px] border-green-800 text-white shadow-sm hover:bg-green-500/70 active:border-b",
         warning:
           "bg-yellow-400 border-b-[3px] border-yellow-800 text-white shadow-sm hover:bg-yellow-500/70 active:border-b",
+        tiptap: " border text-black  hover:bg-gray-100/70 ",
       },
       size: {
         default: "h-9 px-4 py-2",

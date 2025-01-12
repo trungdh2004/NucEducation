@@ -302,7 +302,7 @@ export class QuizService {
       : {};
     const queryDeleted = data.deleted
       ? {
-          deleted:true,
+          deleted: true,
         }
       : { deleted: false };
 

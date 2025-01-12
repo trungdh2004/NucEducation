@@ -70,6 +70,19 @@ export class LessonController {
     }
   );
 
+  public pagingAdminLesson = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const body = pagingLessonValidator.parse(req.body);
+
+      const data = await this.lessonService.pagingAdmin({
+        ...body,
+        deleted: body?.deleted || false,
+      });
+
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
+
   public lessonDetail = asyncHandler(
     async (req: RequestUser, res: Response) => {
       const { id } = req.params;
@@ -108,6 +121,19 @@ export class LessonController {
       }
 
       const data = await this.lessonService.joinCode(code);
+
+      return res.status(HTTPSTATUS.OK).json(data);
+    }
+  );
+
+  public reportsLessonAdmin = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const { id } = req.params;
+      if (!id) {
+        throw new BadRequestException("Chưa truyền mã ");
+      }
+
+      const data = await this.lessonService.reportsLessonAdmin(id);
 
       return res.status(HTTPSTATUS.OK).json(data);
     }

@@ -259,4 +259,82 @@ export class LessonService {
 
     return lesson;
   }
+
+  async pagingAdmin(data: Omit<ILessonPaging, "createBy">) {
+    const limit = data.pageSize || 10;
+    const skip = (data.pageIndex - 1) * limit || 0;
+
+    let queryDate = {};
+    let queryRunning = {};
+
+    if (data.date) {
+      const dateStart = new Date(data.date);
+      const endStart = new Date(data.date);
+      dateStart.setHours(0, 0, 0);
+      endStart.setHours(23, 59, 0);
+
+      queryDate = {
+        startAt: {
+          $gte: dateStart,
+          $lt: endStart,
+        },
+      };
+    }
+
+    if (data.typeRunning === 1) {
+      queryRunning = {
+        inRunning: true,
+      };
+    }
+
+    if (data.typeRunning === 2) {
+      queryRunning = {
+        inRunning: false,
+      };
+    }
+
+    const listLesson = await LessonModel.find({
+      ...queryDate,
+      ...queryRunning,
+      deleted: data.deleted,
+    })
+      .skip(skip)
+      .limit(limit)
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "createBy",
+        select: "name avatar",
+      });
+
+    const count = await LessonModel.countDocuments({
+      ...queryDate,
+      ...queryRunning,
+      deleted: data.deleted,
+    });
+
+    const res = formatResponse({
+      skip,
+      limit,
+      data: listLesson,
+      count,
+    });
+
+    return res;
+  }
+
+  async reportsLessonAdmin(id: string) {
+    const lesson = await this.findByLessonJoin(id);
+
+    const lessonQuestion = await this.findLessonQuestion(id);
+
+    const player = await playerService.playerLesson(id);
+
+    return {
+      lesson,
+      lessonQuestion,
+      player,
+    };
+  }
 }

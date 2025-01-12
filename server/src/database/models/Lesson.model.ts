@@ -24,6 +24,7 @@ const LessonSchema = new Schema(
     createBy: {
       type: Schema.Types.ObjectId,
       required: true,
+      ref: "User",
     },
     code: {
       type: String,

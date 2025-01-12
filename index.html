@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .main {
+        width: 800px;
+        margin: auto;
+        /* border: 1px solid #ccc; */
+        padding: 16px;
+      }
+      header {
+        text-align: center;
+        padding: 4px 0;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+      }
+      .head {
+        padding: 4px 0;
+      }
+
+      .head h4 {
+        font-size: 18px;
+        margin-bottom: 4px;
+        color: blue;
+      }
+      .head p {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function curry(fn) {}
+
+      const join = (a, b, c) => {
+        return `${a}_${b}_${c}`;
+      };
+      const curriedJoin = curry(join);
+      //   console.log(curriedJoin(1, 2, 3));
+      //   console.log("----------");
+      console.log(curriedJoin(1)(2, 3));
+      //   console.log("----------");
+      //   console.log(curriedJoin(1, 2)(3));
+      // '1_2_3'x
+    </script>
+  </body>
+</html>

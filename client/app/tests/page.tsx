@@ -1,12 +1,7 @@
-import React from 'react'
-import FormIndex from './testForm/FormIndex'
+import React from "react";
 
 const page = () => {
-  return (
-    <div>
-        <FormIndex />
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default page
+export default page;

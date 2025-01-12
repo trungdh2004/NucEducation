@@ -41,12 +41,10 @@ const SliderHome = () => {
             <div className="slider-home  bg-gradient-to-r from-[#fd225c] to-[#fd9004]">
               <div className="flex flex-col justify-center flex-shrink-0 w-full md:w-2/3 lg:w-1/2 max-w-full px-2 sm:px-4 md:px-9 text-white leading-4">
                 <h2 className="mb-4 text-3xl leading-5 font-bold">
-                  Đa dạng bài học4
+                  Đa dạng bài học
                 </h2>
                 <p className="max-w-[600px] mb-6 leading-6">
-                  Áo Polo F8 với thiết kế tối giản, lịch sự, phù hợp mặc mọi
-                  lúc, mọi nơi. Chất áo mềm mại, thoáng mát, ngực và tay áo in
-                  logo F8 - Fullstack.
+                  Tại NucEducation mọi người có thể tự tạo những bài tập trắc nghiệm cho bản thân và chia sẻ các bài tập đó cho mọi người cùng làm 
                 </p>
               </div>
             </div>

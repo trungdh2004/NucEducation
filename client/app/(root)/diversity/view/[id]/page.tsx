@@ -1,5 +1,5 @@
+import QuizIndexDetail from "@/components/root/quiz/QuizIndexDetail";
 import { redirect } from "next/navigation";
-import QuizIndexDetail from "./_component/QuizIndexDetail";
 
 const page = async ({
   params,

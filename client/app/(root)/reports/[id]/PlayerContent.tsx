@@ -3,7 +3,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { IPlayerDetails, PlayerResponse } from "@/types/player.type";
 import { format } from "date-fns";
@@ -104,6 +104,10 @@ const PlayerContent = ({ players, totalQuestion }: IProps) => {
             </div>
           </div>
         ))}
+
+      {players.length === 0 && (
+        <div className="p-4 bg-white mt-2 text-center text-sm border rounded-md">Chưa có lượt chơi nào </div>
+      )}
 
       <Dialog open={!!open} onOpenChange={handleClose}>
         <DialogContent className="p-4 max-w-2xl overflow-y-auto max-h-[calc(100vh-100px)]">

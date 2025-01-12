@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { BellIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import HeaderTrigger from "./HeaderTrigger";
 import SearchCodeClient from "./SearchCodeClient";
@@ -21,9 +19,9 @@ const Header = () => {
           <SearchCodeClient />
         </div>
 
-        <Button variant={"outline"} size={"icon"} border={"notActive"}>
+        {/* <Button variant={"outline"} size={"icon"} border={"notActive"}>
           <BellIcon size={20} />
-        </Button>
+        </Button> */}
 
         <HeaderUser />
       </div>

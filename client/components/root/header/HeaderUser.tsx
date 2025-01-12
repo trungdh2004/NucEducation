@@ -6,14 +6,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { useAuthContext } from "@/context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { toast } from "sonner";
 
 const HeaderUser = ({ isAdmin = false }: { isAdmin?: boolean }) => {
@@ -73,13 +71,14 @@ const HeaderUser = ({ isAdmin = false }: { isAdmin?: boolean }) => {
                 </div>
               </div>
             </DropdownMenuLabel>
-            {!isAdmin && (
-              <Link href={"/admin"}>
-                <DropdownMenuItem className="cursor-pointer">
-                  Trang quản trị
-                </DropdownMenuItem>
-              </Link>
-            )}
+            {!isAdmin &&
+              user?.isAdmin &&(
+                <Link href={"/admin"}>
+                  <DropdownMenuItem className="cursor-pointer">
+                    Trang quản trị
+                  </DropdownMenuItem>
+                </Link>
+              )}
             {isAdmin && (
               <Link href={"/"}>
                 <DropdownMenuItem className="cursor-pointer">
@@ -87,14 +86,10 @@ const HeaderUser = ({ isAdmin = false }: { isAdmin?: boolean }) => {
                 </DropdownMenuItem>
               </Link>
             )}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
-              Hồ sơ
-            </DropdownMenuItem>
+
             <DropdownMenuItem className="cursor-pointer">
               Cài đặt
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
             <DropdownMenuItem
               className="cursor-pointer focus:text-rose-500 focus:bg-rose-100/50"
               onClick={handleLogOut}

@@ -24,6 +24,7 @@ import { AuthService } from "./auth.service";
 import { RequestUser } from "../../interface/config.interface";
 import { config } from "../../config/app.config";
 import { laterMinutesFromNow } from "../../config/date-time";
+import { pagingValidator } from "../../validators/searchObject";
 
 export class AuthController {
   private authService: AuthService;
@@ -161,5 +162,41 @@ export class AuthController {
     return res.status(HTTPSTATUS.OK).json({
       message: "Đổi mật khẩu thành công",
     });
+  });
+
+  public changeName = asyncHandler(async (req: RequestUser, res: Response) => {
+    const { name } = req.body;
+    const user = req.user;
+
+    if (!name) {
+      throw new BadRequestException("Chưa truyền tên");
+    }
+
+    const data = await this.authService.changeName(user?.id, name);
+
+    return res.status(HTTPSTATUS.OK).json(data);
+  });
+  public changePassword = asyncHandler(
+    async (req: RequestUser, res: Response) => {
+      const { password } = req.body;
+      const user = req.user;
+
+      if (!password) {
+        throw new BadRequestException("Chưa truyền tên");
+      }
+
+      const data = await this.authService.changePassword(user?.id, password);
+
+      return res.status(HTTPSTATUS.OK).json({
+        message: "Đổi mật khẩu thành công",
+      });
+    }
+  );
+  public paging = asyncHandler(async (req: RequestUser, res: Response) => {
+    const body = pagingValidator.parse(req.body);
+
+    const data = await this.authService.pagingUser(body);
+
+    return res.status(HTTPSTATUS.OK).json(data);
   });
 }

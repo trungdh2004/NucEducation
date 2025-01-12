@@ -11,7 +11,6 @@ export class QuestionService {
       throw new BadRequestException("Không có bài tập");
     }
 
-
     const newQuestion = await QuestionModel.create({
       aiGenerated: data.aiGenerated,
       query: {
@@ -28,6 +27,12 @@ export class QuestionService {
     if (!newQuestion) {
       throw new BadRequestException("Tạo thất bại");
     }
+
+    await QuizModel.findByIdAndUpdate(data.quizId, {
+      $inc: {
+        "stats.totalQuestions": 1,
+      },
+    });
 
     return newQuestion;
   }
@@ -87,6 +92,12 @@ export class QuestionService {
     }
 
     const deleteQuestion = await QuestionModel.findByIdAndDelete(id);
+
+    await QuizModel.findByIdAndUpdate(existingQuestion.quizId, {
+      $inc: {
+        "stats.totalQuestions": -1,
+      },
+    });
     return id;
   }
 
@@ -111,6 +122,12 @@ export class QuestionService {
 
     const newQuestion = await QuestionModel.create(data);
 
+    await QuizModel.findByIdAndUpdate(data.quizId, {
+      $inc: {
+        "stats.totalQuestions": 1,
+      },
+    });
+
     return newQuestion;
   }
 
@@ -128,6 +145,12 @@ export class QuestionService {
     if (!newQuestion) {
       throw new BadRequestException("Tạo thất bại");
     }
+
+    await QuizModel.findByIdAndUpdate(quizId, {
+      $inc: {
+        "stats.totalQuestions": data.length,
+      },
+    });
 
     return newQuestion;
   }

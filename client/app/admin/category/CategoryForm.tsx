@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   createCateApi,
   getByIdCateApi,
@@ -91,8 +91,6 @@ const CategoryForm = ({ open, handleClose, handlePaging }: FormDialog) => {
   const handleUploadFile = async (file: File) => {
     try {
       const data = await uploadSingerApi(file, 140, 140);
-      console.log("data", data);
-
       URL.revokeObjectURL(image.url);
       setImage({
         url: data.path,
@@ -107,7 +105,11 @@ const CategoryForm = ({ open, handleClose, handlePaging }: FormDialog) => {
   };
 
   const close = () => {
-    form.reset();
+    form.reset({
+      name: "",
+      thumbnail: { url: "" },
+      description: "",
+    });
     setImage({
       url: "",
       file: undefined,
@@ -157,7 +159,7 @@ const CategoryForm = ({ open, handleClose, handlePaging }: FormDialog) => {
         }
       })();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {

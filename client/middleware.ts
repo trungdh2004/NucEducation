@@ -23,6 +23,11 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (isStartWith && !accessToken) {
+    console.log({
+      path,
+      accessToken,
+    });
+
     return NextResponse.redirect(new URL("/auth/login", req.nextUrl));
   }
 

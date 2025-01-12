@@ -127,7 +127,7 @@ const ReportDetailIndex = ({ id }: { id: string }) => {
             </div>
 
             <Link
-              href={`/quiz/${lesson?.quizId}`}
+              href={`/diversity/view/${lesson?.quizId}`}
               className="px-3 py-2 rounded border text-sm bg-gray-100 cursor-pointer"
             >
               Xem câu hỏi

@@ -12,8 +12,6 @@ import {
 import { getRank } from "@/config/rank.config";
 import { IQuizResponse } from "@/types/quizz.type";
 import {
-  Bookmark,
-  BookOpenCheck,
   EllipsisVerticalIcon,
   HeartIcon,
   HeartOffIcon,
@@ -27,7 +25,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 
 interface IProps {
   quiz: IQuizResponse;
@@ -58,7 +57,9 @@ const QuizDetailHeader = ({
 
         router.push(`/fullScreen/activity/${data._id}`);
       } catch (error: unknown) {
+        const err = error as Error;
         console.log("err lesson live", error);
+        toast.error(err.message);
       }
     });
   };
@@ -179,11 +180,18 @@ const QuizDetailHeader = ({
                 <DropdownMenuContent>
                   {quiz.isPublic && (
                     <>
-                      <DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          if (navigator.clipboard) {
+                            navigator.clipboard
+                              .writeText(`/diversity/view/${quiz._id}`)
+                              .then(() => {
+                                toast.success(`Đã copy link bài tập`);
+                              });
+                          }
+                        }}
+                      >
                         <LinkIcon /> Copy link
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Bookmark /> Lưu bài tập
                       </DropdownMenuItem>
                     </>
                   )}
@@ -200,11 +208,6 @@ const QuizDetailHeader = ({
           <div className="flex items-center gap-2">
             {quiz.isPublic ? (
               <>
-                <Button variant={"warning"}>
-                  {" "}
-                  <BookOpenCheck />
-                  Giao bài
-                </Button>
                 <Button
                   variant={"success"}
                   onClick={() => {

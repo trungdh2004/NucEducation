@@ -102,7 +102,6 @@ export function SidebarAdmin() {
           <ScrollArea className="flex-1">
             <SidebarList />
           </ScrollArea>
-          <SidebarFooter />
         </div>
       </div>
     </div>

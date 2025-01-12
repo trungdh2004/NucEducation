@@ -13,7 +13,13 @@ import QuizDetailHeader from "./QuizDetailHeader";
 import QuizItem from "./QuizItem";
 import { toast } from "sonner";
 
-const QuizIndexDetail = ({ id }: { id: string }) => {
+const QuizIndexDetail = ({
+  id,
+  isAdmin,
+}: {
+  id: string;
+  isAdmin?: boolean;
+}) => {
   const [quiz, setQuiz] = useState<IQuizResponse | object>({});
   const [questions, setQuestions] = useState<IQuestionResponse[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,7 +76,7 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
 
   useEffect(() => {
     handleDetail(id);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
@@ -107,6 +113,7 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
                 handleDelete={handleDelete}
                 handleLoved={handleLoved}
                 handlePublic={handlePublic}
+                isAdmin={isAdmin}
               />
 
               <div className="w-full grid grid-cols-12 gap-4 mt-4">

@@ -78,10 +78,12 @@ const QuestionContent = ({ questions }: { questions: ILessonQuestion[] }) => {
                     <div
                       className=" h-full bg-green-500 "
                       style={{
-                        width: `${handlePercent(
-                          question?.stats?.totalCorrect,
-                          question?.stats?.totalAnswer
-                        )}%`,
+                        width: `${
+                          handlePercent(
+                            question?.stats?.totalCorrect,
+                            question?.stats?.totalAnswer
+                          ) || 0
+                        }%`,
                       }}
                     ></div>
                   </div>
@@ -97,10 +99,12 @@ const QuestionContent = ({ questions }: { questions: ILessonQuestion[] }) => {
                     <div
                       className="w-1/2 h-full bg-rose-500 "
                       style={{
-                        width: `${handlePercent(
-                          question?.stats?.totalWrong,
-                          question?.stats?.totalAnswer
-                        )}%`,
+                        width: `${
+                          handlePercent(
+                            question?.stats?.totalWrong,
+                            question?.stats?.totalAnswer
+                          ) || 0
+                        }%`,
                       }}
                     ></div>
                   </div>

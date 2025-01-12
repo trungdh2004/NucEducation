@@ -29,6 +29,8 @@ import { config } from "../../config/app.config";
 import sendToMail, { getTemplateEmail } from "../../mailers/mailer";
 import { generateCodeOtp } from "../../utils/uuid";
 import OTPModel from "../../database/models/Otp.model";
+import { SearchObjectBase } from "../../interface/search.interface";
+import { formatResponse } from "../../config/response";
 
 export class AuthService {
   public async register(data: RegisterDto) {
@@ -337,5 +339,70 @@ export class AuthService {
     user.save();
 
     return user;
+  }
+
+  public async findById(id: string) {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      throw new BadRequestException("Không có người dùng");
+    }
+
+    return user;
+  }
+
+  public async changeName(id: string, name: string) {
+    const user = await this.findById(id);
+
+    const update = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        name,
+      },
+      { new: true }
+    );
+
+    return update;
+  }
+
+  public async changePassword(id: string, password: string) {
+    const user = await this.findById(id);
+
+    user.password = password;
+
+    await user.save();
+
+    return user;
+  }
+
+  public async pagingUser(data: SearchObjectBase) {
+    const limit = data.pageSize || 5;
+    const skip = (data.pageIndex - 1) * limit || 0;
+
+    const queryKey = data.keyword
+      ? {
+          name: {
+            $regex: data.keyword,
+            $options: "i",
+          },
+        }
+      : {};
+
+    const listData = await UserModel.find({
+      ...queryKey,
+    })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const countData = await UserModel.countDocuments({
+      ...queryKey,
+    });
+
+    return formatResponse({
+      skip,
+      limit,
+      data: listData,
+      count: countData,
+    });
   }
 }

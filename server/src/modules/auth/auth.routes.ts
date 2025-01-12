@@ -13,5 +13,12 @@ authRouter.get("/logout", authentication, authController.logout);
 authRouter.post("/sendMailOtp", authController.sendMailOtp);
 authRouter.post("/verifyOtp", authController.forgotOtp);
 authRouter.post("/forgotPass", authController.forgotPassword);
+authRouter.post("/changeName", authentication, authController.changeName);
+authRouter.post(
+  "/changePassword",
+  authentication,
+  authController.changePassword
+);
+authRouter.post("/paging", authentication, authController.paging);
 
 export default authRouter;

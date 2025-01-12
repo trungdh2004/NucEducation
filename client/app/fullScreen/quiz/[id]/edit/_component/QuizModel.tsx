@@ -269,7 +269,7 @@ const QuizModel = ({ open, handleClose, initData, handleEditQuiz }: IProps) => {
                   control={form.control}
                   name="category"
                   render={({ field }) => (
-                    <FormItem className="space-y-1">
+                    <FormItem className="space-y-1 max-h-20">
                       <FormLabel>Môn học</FormLabel>
                       <FormControl>
                         <SelectPagingComponent<CateResponse>

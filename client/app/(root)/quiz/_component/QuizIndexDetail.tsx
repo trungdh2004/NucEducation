@@ -9,9 +9,9 @@ import { IQuestionResponse } from "@/types/question.type";
 import { IQuizResponse } from "@/types/quizz.type";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import QuizDetailHeader from "./QuizDetailHeader";
 import QuizItem from "./QuizItem";
-import { toast } from "sonner";
 
 const QuizIndexDetail = ({ id }: { id: string }) => {
   const [quiz, setQuiz] = useState<IQuizResponse | object>({});
@@ -25,8 +25,10 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
       const data = await getByIdQuizApi(id);
       setQuiz(data.quiz);
       setQuestions(data.questions);
-    } catch (error) {
+    } catch (error: unknown) {
+      toast.error("Không có bài học nào");
       console.log("error", error);
+
       router.push("/");
     } finally {
       setLoading(false);
@@ -64,13 +66,14 @@ const QuizIndexDetail = ({ id }: { id: string }) => {
       handleDetail(id);
     } catch (error: unknown) {
       const err = error as Error;
+
       toast.error(err.message);
     }
   };
 
   useEffect(() => {
     handleDetail(id);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

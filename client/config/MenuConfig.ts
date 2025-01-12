@@ -29,11 +29,6 @@ const listMenuClient: any[] = [
     link: "/reports",
     icon: ChartPieIcon,
   },
-  {
-    title: "Bài viết",
-    link: "/blogs",
-    icon: BookMinusIcon,
-  },
 ];
 
 export default listMenuClient;

@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button";
 import { getRank } from "@/config/rank.config";
 import { IQuizResponse } from "@/types/quizz.type";
 import {
-  BookOpenCheck,
   LoaderIcon,
   NotebookPenIcon,
-  PlayIcon,
+  PlayIcon
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -20,9 +19,10 @@ interface IProps {
   handleDelete: () => void;
   handleLoved: (isLove: boolean) => void;
   handlePublic: () => void;
+  isAdmin?: boolean;
 }
 
-const QuizDetailHeader = ({ quiz, handleDelete }: IProps) => {
+const QuizDetailHeader = ({ quiz, handleDelete, isAdmin = false }: IProps) => {
   const router = useRouter();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [isPending, setTransition] = useTransition();
@@ -127,26 +127,23 @@ const QuizDetailHeader = ({ quiz, handleDelete }: IProps) => {
         <div className="flex sm:items-center justify-between flex-col gap-2 sm:flex-row">
           <div></div>
 
-          <div className="flex items-center gap-2">
-            <Button variant={"warning"}>
-              {" "}
-              <BookOpenCheck />
-              Giao bài
-            </Button>
-            <Button
-              variant={"success"}
-              onClick={() => {
-                handleCreateLiveLesson();
-              }}
-            >
-              {isPending ? (
-                <LoaderIcon className="animate-spin" />
-              ) : (
-                <PlayIcon />
-              )}
-              Bắt đầu
-            </Button>
-          </div>
+          {!isAdmin && (
+            <div className="flex items-center gap-2">
+              <Button
+                variant={"success"}
+                onClick={() => {
+                  handleCreateLiveLesson();
+                }}
+              >
+                {isPending ? (
+                  <LoaderIcon className="animate-spin" />
+                ) : (
+                  <PlayIcon />
+                )}
+                Bắt đầu
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 

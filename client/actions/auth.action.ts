@@ -1,4 +1,5 @@
 import apiRequest from "@/lib/fetchApi";
+import { SearchBase } from "@/types/system.type";
 import { FormLoginType, FormRegisterType } from "@/types/User.type";
 
 export const loginApi = (data: FormLoginType) =>
@@ -24,3 +25,12 @@ export const forgotPassApi = (
   password: string,
   confirmPassword: string
 ) => apiRequest.post("/auth/forgotPass", { email, password, confirmPassword });
+
+export const changeNameApi = (name: string) =>
+  apiRequest.post("/auth/changeName", { name });
+
+export const changePassApi = (password: string) =>
+  apiRequest.post("/auth/changePassword", { password });
+
+export const pagingAuthApi = (obj: SearchBase) =>
+  apiRequest.post("/auth/paging", obj);

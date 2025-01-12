@@ -1,16 +1,16 @@
 "use client";
-import CircularProgressbarPage from "@/components/common/CircularProgressbar";
-import { EllipsisVerticalIcon, ListCheck, UsersRoundIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import HeaderReport from "./HeaderReport";
-import { IPagingLesson, LessonResponseReview } from "@/types/lesson.type";
 import { pagingLessonApi } from "@/actions/lesson.action";
-import { ChangeSearch, Response } from "@/types/system.type";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
+import CircularProgressbarPage from "@/components/common/CircularProgressbar";
 import Paginations from "@/components/common/Pagination";
-import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { IPagingLesson, LessonResponseReview } from "@/types/lesson.type";
+import { ChangeSearch, Response } from "@/types/system.type";
+import { format } from "date-fns";
+import { ListCheck, UsersRoundIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import HeaderReport from "./HeaderReport";
 
 const TableReports = () => {
   const router = useRouter();
@@ -93,12 +93,6 @@ const TableReports = () => {
                 <td className="partition-border font-bold text-xs text-dark-4 px-3 py-2 w-2/12 text-center">
                   Mã số
                 </td>
-                <td className="partition-border font-bold text-xs text-dark-4 px-3 py-2 w-2/12 text-center">
-                  Lớp học
-                </td>
-                <td className="partition-border font-bold text-xs text-dark-4 px-3 py-2 w-2/12 text-center">
-                  Hành động
-                </td>
               </tr>
             </thead>
             <tbody>
@@ -114,7 +108,7 @@ const TableReports = () => {
                 <tr
                   className="partition-border cursor-pointer h-16 hover:bg-gray-100"
                   key={lesson._id}
-                  onDoubleClick={() => {
+                  onClick={() => {
                     router.push(`/reports/${lesson._id}`);
                   }}
                 >
@@ -189,22 +183,6 @@ const TableReports = () => {
                       )}
                     </div>
                   </td>
-                  <td>
-                    <div className="flex items-center justify-center">
-                      {lesson?.class?.length > 0 && (
-                        <span className="px-2 py-1 rounded-sm text-xs border border-l-4 border-yellow-500">
-                          {lesson.class.length} lớp học
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="text-center flex items-center justify-center">
-                      <span className="p-1 rounded-full border hover:bg-gray-50 cursor-pointer">
-                        <EllipsisVerticalIcon size={20} />
-                      </span>
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -237,9 +215,6 @@ const TableReports = () => {
                     <div className="p-1 rounded bg-rose-200 text-rose-500 text-xs font-semibold">
                       {handleCorrect(lesson.totalCorrect, lesson.totalAnswers)}%
                     </div>
-                  </div>
-                  <div className="p-1 rounded border cursor-pointer hover:bg-gray-50 ">
-                    <EllipsisVerticalIcon size={14} />
                   </div>
                 </div>
 

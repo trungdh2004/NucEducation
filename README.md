@@ -1,32 +1,27 @@
 # NucEducation website tạo bài tập kiểm tra
 
-Một mô tả ngắn gọn, hấp dẫn về dự án của bạn.
-
-## 🚀 Demo
-[Cung cấp liên kết đến bản demo hoặc ảnh chụp màn hình nếu có]
+NucEducation là trang web giúp mọi người có thể tạo các câu hỏi trắc nghiệm, cuộc chơi cho mỗi bài quiz, tích hợp AI Gemini để giúp người tạo dễ dàng tìm các câu hỏi tương tự và sử dụng vào bài tập
 
 ## 📚 Nội dung
 - [Giới thiệu](#📖-giới-thiệu)
 - [Tính năng](#tính-năng)
 - [Cài đặt](#-cài-đặt)
-- [Sử dụng](#sử-dụng)
-- [Đóng góp](#đóng-góp)
-- [Liên hệ](#liên-hệ)
-- [Giấy phép](#giấy-phép)
 - [Layout](#layout)
 
 ## 📖 Giới thiệu
 
 Mô tả chi tiết hơn về dự án:
-- Mục tiêu của dự án.
-- Tại sao dự án này hữu ích.
-- Đối tượng người dùng là ai.
+- Giúp mọi người có thể tạo những bài tập trắc nghiệm để kiểm tra học sinh và giúp các học sinh, sinh viên ôn tập mỗi kì thi, người tạo các bài tập có thể tạo nhiều cuộc chơi cho mọi người tham gia làm bài tập đó . Khi tạo câu hỏi trong bài tập, trang web hỗ trợ 3 loại câu hỏi gồm : 1 đáp án đúng, nhiều đáp án và điền vào ô trống. Đặc biệt trang web tích hợp AI Gemini hỗ trợ người dùng tạo các câu hỏi bài tập dễ dàng
+- Đối tượng : Là các giáo viên, học sinh, sinh viên đang học hành
 
 ## 🌟 Tính năng
 Liệt kê các tính năng chính của dự án:
-- ✅ Tính năng 1
-- ✅ Tính năng 2
-- ✅ Tính năng 3
+- Danh sách chi tiết các bài tập
+- Tạo các bài tập
+- Tích hợp AI hỗ trợ tạo câu hỏi
+- Tạo các câu hỏi cho bài tập
+- Tạo cuộc chơi, link tham gia, mã qr
+- Thống kê cuộc chơi, chi tiết từng người tham gia, tỉ lệ đúng của mỗi câu hỏi
 
 ## 🛠️ Công nghệ sử dụng
 Liệt kê các công nghệ, framework, hoặc thư viện được sử dụng:
@@ -69,4 +64,5 @@ Hướng dẫn cài đặt dự án:
    ```
 ## Layout
 
-Hướng dẫn cài đặt dự án:
+1. Trang chủ
+   
